@@ -1,3 +1,5 @@
+package RangeSumQuery;
+
 import org.junit.Test;
 
 /**
