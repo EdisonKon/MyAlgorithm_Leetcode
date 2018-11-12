@@ -16,7 +16,7 @@ public class TestJava {
 //        String a = "201810";
 //        System.out.println(a.substring(4));
 //        System.out.println(a.substring(0,4));
-
+        System.out.println(11 / 2);
         int a = 10;
         int b = a;
         b = 3;
