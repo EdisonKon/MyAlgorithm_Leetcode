@@ -2,6 +2,9 @@ package PalindromePairs;
 
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @description: 描述
  * @author: dekai.kong (dekai.kong@luckincoffee.com)
@@ -33,9 +36,6 @@ public class LongestPalindromeString {
 
     }
     //分情况判断方法
-    int maxLen = 1;
-    int start = 0;
-    int end = 0;
     public String longestPalindrome(String s) {
         if(s.length() == 0 || s.length() == 1){
             return s;
@@ -93,9 +93,75 @@ public class LongestPalindromeString {
         }
         return true;
     }
+
+
+    public String longestPalindrome2(String s) {
+        int len = s.length();
+        int left = 0, right = len - 1;
+        if(s.length() == 0 || s.length() == 1 || isBack(s,left,right)){
+            return s;
+        }
+        for(int i = 1;i<len;i++){
+            for(int j = 0;j<=i;j++){
+                String rs = s.substring(j,len-i+j);
+                if(isBack(rs,0,rs.length()-1)){
+                    return rs;
+                }
+            }
+        }
+        return "";
+    }
+    public boolean isBack(String s,int left,int right){
+        while(left < right){
+            if(s.charAt(left++) != s.charAt(right--)) return false;
+        }
+        return true;
+    }
     @Test
     public void TestLongestPalindromeString(){
-        System.out.println(longestPalindrome("bbbb"));
-//        System.out.println(longestPalindrome2("babad"));
+//        System.out.println(longestPalindrome("bbbb"));
+        System.out.println(longestPalindrome2("babad"));
     }
+
+/**
+
+ //分情况判断方法
+ int maxLen = 1;
+ int start = 0;
+ int end = 0;
+ public String longestPalindrome(String s) {
+ if(s.length() == 0 || s.length() == 1){
+ return s;
+ }
+ int len = s.length();
+ for (int i = 1; i < len; i++) {
+ isOddBack(s,i);
+ isEvenBack(s,i);
+ }
+ return s.substring(start,end);
+ }
+ public void isOddBack(String s,int index){
+ int left =index;
+ int righ= index;
+ while(left >= 1 && righ < (s.length() - 1) && s.charAt(left--) == s.charAt(righ++)){
+ if(righ - left >= maxLen){
+ maxLen = righ - left;
+ start = left;
+ end = righ;
+ }
+ }
+ }
+ public void isEvenBack(String s,int index){
+ int left =index;
+ int righ= index;
+ while(left >= 1 && righ <= (s.length()-1)  && s.charAt(left) == s.charAt(righ++)){
+ if(righ - left >= maxLen){
+ maxLen = righ - left;
+ start = left;
+ end = righ;
+ }
+ }
+ }
+
+ * */
 }
