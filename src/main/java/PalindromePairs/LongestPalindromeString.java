@@ -2,9 +2,6 @@ package PalindromePairs;
 
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @description: 描述
  * @author: dekai.kong (dekai.kong@luckincoffee.com)
@@ -35,40 +32,45 @@ public class LongestPalindromeString {
     public LongestPalindromeString(){
 
     }
+    //分情况判断方法
+    int maxLen = 1;
+    int start = 0;
+    int end = 0;
     public String longestPalindrome(String s) {
         if(s.length() == 0 || s.length() == 1){
             return s;
         }
         int len = s.length();
-        int maxLen = 1;
-        Map<Integer,String> mapKv = new HashMap<>();
-        for(int i = 1;i<len;i++){
-            int left =i;
-            int righ= i;
-            while(left > 0 && righ < len-1){
-                left = --left;
-                righ = ++righ;
-
-                if(s.charAt(left) == s.charAt(righ)){
-                    if(maxLen <= righ-left+1){
-                        maxLen = Math.max(maxLen,righ-left+1);
-                        mapKv.put(maxLen,s.substring(left,righ+1));
-                    }
-                }else if(s.charAt(left) == s.charAt(i)){
-                    righ = i;
-                    maxLen = Math.max(maxLen,righ-left+1);
-                    mapKv.put(maxLen,s.substring(left,righ+1));
-                }else{
-                    break;
-                }
-            }
-            if(maxLen == len){
-                break;
+        for (int i = 1; i < len; i++) {
+            isOddBack(s,i);
+            isEvenBack(s,i);
+        }
+        return s.substring(start,end);
+    }
+    public void isOddBack(String s,int index){
+        int left =index;
+        int righ= index;
+        while(left >= 1 && righ < (s.length() - 1) && s.charAt(left--) == s.charAt(righ++)){
+            if(righ - left >= maxLen){
+                maxLen = righ - left;
+                start = left;
+                end = righ;
             }
         }
-        return mapKv.get(maxLen);
+    }
+    public void isEvenBack(String s,int index){
+        int left =index;
+        int righ= index;
+        while(left >= 1 && righ <= (s.length()-1)  && s.charAt(left) == s.charAt(righ++)){
+            if(righ - left >= maxLen){
+                maxLen = righ - left;
+                start = left;
+                end = righ;
+            }
+        }
     }
 
+//n^3的运行时间,ac了
     public String longestPalindrome2(String s) {
         int len = s.length();
         int left = 0, right = len - 1;
@@ -93,7 +95,7 @@ public class LongestPalindromeString {
     }
     @Test
     public void TestLongestPalindromeString(){
-//        System.out.println(longestPalindrome("bbbb"));
-        System.out.println(longestPalindrome2("babad"));
+        System.out.println(longestPalindrome("bbbb"));
+//        System.out.println(longestPalindrome2("babad"));
     }
 }
