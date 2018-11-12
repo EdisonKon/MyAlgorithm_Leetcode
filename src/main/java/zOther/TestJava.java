@@ -42,6 +42,7 @@ public class TestJava {
         lx.add(1);
         lx.add(1);
         System.out.println(lx);
+        System.out.println("commit1");
     }
 
     public static int parseInt(String num,int index){
