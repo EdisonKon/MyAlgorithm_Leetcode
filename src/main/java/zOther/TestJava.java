@@ -48,6 +48,7 @@ public class TestJava {
 
 
         System.out.println("new Commit1");
+        System.out.println("new Commit2");
 
     }
 
