@@ -1,7 +1,10 @@
 package zOther;
 
+import com.sun.deploy.util.StringUtils;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,6 +21,8 @@ public class TestJava {
 //        System.out.println(a.substring(0,4));
         System.out.println(11 / 2);
         int a = 10;
+        String ks = "#"+StringUtils.join(Arrays.asList("bbbb".split("")),"#")+"#";
+        System.out.println(ks);
         int b = a;
         b = 3;
         System.out.println(a+"--"+b);

@@ -35,53 +35,37 @@ public class LongestPalindromeString {
     public LongestPalindromeString(){
 
     }
-    //分情况判断方法
+    public String longestPalindrome3(String s){
+        //TODO manacher algorithm 方法
+        return "";
+    }
+    //加#的方法
     public String longestPalindrome(String s) {
         if(s.length() == 0 || s.length() == 1){
             return s;
         }
-        int len = s.length();
-        for (int i = 1; i < len; i++) {
-            isOddBack(s,i);
-            isEvenBack(s,i);
+        String ks = "#";
+        String[] x = s.split("");
+        for (int i = 0; i <x.length; i++) {
+            ks+=x[i]+"#";
         }
-        return s.substring(start,end);
-    }
-    public void isOddBack(String s,int index){
-        int left =index;
-        int righ= index;
-        while(left >= 1 && righ < (s.length() - 1) && s.charAt(left--) == s.charAt(righ++)){
-            if(righ - left >= maxLen){
-                maxLen = righ - left;
-                start = left;
-                end = righ;
-            }
-        }
-    }
-    public void isEvenBack(String s,int index){
-        int left =index;
-        int righ= index;
-        while(left >= 1 && righ <= (s.length()-1)  && s.charAt(left) == s.charAt(righ++)){
-            if(righ - left >= maxLen){
-                maxLen = righ - left;
-                start = left;
-                end = righ;
-            }
-        }
-    }
 
-//n^3的运行时间,ac了
-    public String longestPalindrome2(String s) {
-        int len = s.length();
-        int left = 0, right = len - 1;
-        if(s.length() == 0 || s.length() == 1 || isBack(s,left,right)){
-            return s;
-        }
+        int len = ks.length();
+        int maxLen = 1;
+        Map<Integer,String> mapKv = new HashMap<>();
         for(int i = 1;i<len;i++){
-            for(int j = 0;j<=i;j++){
-                String rs = s.substring(j,len-i+j);
-                if(isBack(rs,0,rs.length()-1)){
-                    return rs;
+            int left =i;
+            int righ= i;
+            while(left > 0 && righ < len-1){
+                left = --left;
+                righ = ++righ;
+                if(ks.charAt(left) == ks.charAt(righ)){
+                    if(maxLen < righ-left+1){
+                        maxLen = Math.max(maxLen,righ-left+1);
+                        mapKv.put(maxLen,ks.substring(left,righ+1));
+                    }
+                }else{
+                    break;
                 }
             }
         }
@@ -94,7 +78,7 @@ public class LongestPalindromeString {
         return true;
     }
 
-
+//AC n^3 从最长的开始找,一直找到1个的情况
     public String longestPalindrome2(String s) {
         int len = s.length();
         int left = 0, right = len - 1;
@@ -119,8 +103,8 @@ public class LongestPalindromeString {
     }
     @Test
     public void TestLongestPalindromeString(){
-//        System.out.println(longestPalindrome("bbbb"));
-        System.out.println(longestPalindrome2("babad"));
+        System.out.println(longestPalindrome("cbbd"));
+//        System.out.println(longestPalindrome2("babad"));
     }
 
 /**
