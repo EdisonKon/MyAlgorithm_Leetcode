@@ -42,13 +42,6 @@ public class TestJava {
         lx.add(1);
         lx.add(1);
         System.out.println(lx);
-        System.out.println("commit3");
-        System.out.println("commit1");
-        System.out.println("commit2");
-
-
-        System.out.println("new Commit1");
-        System.out.println("new Commit2");
 
     }
 
