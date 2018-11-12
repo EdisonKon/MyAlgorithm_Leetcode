@@ -45,9 +45,6 @@ public class TestJava {
         System.out.println("commit3");
         System.out.println("commit1");
         System.out.println("commit2");
-
-        System.out.println("new Commit1");
-
     }
 
     public static int parseInt(String num,int index){
