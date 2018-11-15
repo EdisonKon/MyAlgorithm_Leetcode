@@ -35,11 +35,55 @@ public class LongestPalindromeString {
     public LongestPalindromeString(){
 
     }
+    /**
+     * manacher 算法 70ms
+     * 参考   https://segmentfault.com/a/1190000003914228
+     *       https://algs4.cs.princeton.edu/53substring/Manacher.java.html
+     * */
     public String longestPalindrome3(String s){
         //TODO manacher algorithm 方法
-        return "";
+        String ks = "#";
+        String[] x = s.split("");
+        for (int i = 0; i <x.length; i++) {
+            ks+=x[i]+"#";
+        }
+        int[] rl = new int[ks.length()];
+        int maxRight = 0;
+        int currentPos = 0;
+        int maxLen = 0;
+        int maxPos = 0;
+
+        for (int i = 0; i < ks.length(); i++) {
+            if(i < maxRight){
+                rl[i] = Math.min(rl[2*currentPos-i],maxRight-i);
+            }else{
+                rl[i] = 1;
+            }
+            //不是边界并且向左右扩展
+            while(i - rl[i] >= 0 && i+rl[i] < ks.length() && ks.charAt(i - rl[i]) == ks.charAt(i + rl[i])){
+                rl[i] += 1;
+            }
+            //更新maxRight 和 currentPos
+            if(rl[i]+i-1 > maxRight){
+                maxRight = rl[i]+i-1;
+                currentPos = i;
+            }
+            //设置最长回文串的长度
+            if(rl[i]>maxLen){
+                maxPos = i;
+            }
+            maxLen = Math.max(maxLen,rl[i]);
+        }
+        System.out.println(maxPos);
+
+        int start = maxPos/2-(maxLen-1)/2;
+        int end = start + maxLen -1;
+        return s.substring(start,end);
     }
-    //加#的方法
+
+    /***加#的方法
+     * 152 ms
+     */
     public String longestPalindrome(String s) {
         if(s.length() == 0 || s.length() == 1){
             return s;
@@ -78,7 +122,10 @@ public class LongestPalindromeString {
         return true;
     }
 
-//AC n^3 从最长的开始找,一直找到1个的情况
+    /***
+     * AC n^3 从最长的开始找,一直找到1个的情况
+     * 572 ms
+     */
     public String longestPalindrome2(String s) {
         int len = s.length();
         int left = 0, right = len - 1;
@@ -95,16 +142,11 @@ public class LongestPalindromeString {
         }
         return "";
     }
-    public boolean isBack(String s,int left,int right){
-        while(left < right){
-            if(s.charAt(left++) != s.charAt(right--)) return false;
-        }
-        return true;
-    }
     @Test
     public void TestLongestPalindromeString(){
-        System.out.println(longestPalindrome("cbbd"));
+//        System.out.println(longestPalindrome("cbbd"));
 //        System.out.println(longestPalindrome2("babad"));
+        System.out.println(longestPalindrome3("abacdbd"));
     }
 
 /**
