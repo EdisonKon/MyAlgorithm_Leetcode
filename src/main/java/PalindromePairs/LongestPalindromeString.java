@@ -41,7 +41,6 @@ public class LongestPalindromeString {
      *       https://algs4.cs.princeton.edu/53substring/Manacher.java.html
      * */
     public String longestPalindrome3(String s){
-        //TODO manacher algorithm 方法
         String ks = "#";
         String[] x = s.split("");
         for (int i = 0; i <x.length; i++) {
