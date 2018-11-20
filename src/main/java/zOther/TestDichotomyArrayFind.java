@@ -109,20 +109,7 @@ public class TestDichotomyArrayFind {
         }
         return null;
     }
-    //TODO 虽然ac了 但是不是最好的方法,多用了空间的O(m+n),解法 https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/
-    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        Double rst = 0D;
-        int[] rstnum;
-        rstnum = Arrays.copyOf(nums1,nums1.length+nums2.length);
-        System.arraycopy(nums2,0,rstnum,nums1.length,nums2.length);
-        Arrays.sort(rstnum);
-        int x = rstnum.length/2;
-        if(rstnum.length%2 == 0){
-            rst = (double)(rstnum[x-1]+rstnum[x])/2;
-            return rst;
-        }
-        return rstnum[x];
-    }
+
 
     //ZigZag Conversion
     //https://www.cnblogs.com/springfor/p/3889414.html
