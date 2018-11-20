@@ -44,10 +44,13 @@ public class TestJava {
 
         List<Integer> lx = new ArrayList<>();
         lx.add(1);
-        lx.add(1);
-        lx.add(1);
+        lx.add(2);
+        lx.add(3);
+        Integer[] xa = lx.toArray(new Integer[lx.size()]);
         System.out.println(lx);
         System.out.println("znm3");
+
+
 
     }
 
