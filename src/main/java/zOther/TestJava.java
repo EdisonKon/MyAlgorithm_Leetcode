@@ -49,6 +49,11 @@ public class TestJava {
         Integer[] xa = lx.toArray(new Integer[lx.size()]);
         System.out.println(lx);
         System.out.println("znm3");
+        StringBuffer sv = new StringBuffer("vvv");//线程安全
+        StringBuilder ac = new StringBuilder("avc");//线程不安全
+        sv.reverse();
+        ac.reverse();
+
 //        System.out.println(Integer.parseInt("888888888888"));
 
 
