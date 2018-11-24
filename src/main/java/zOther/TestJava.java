@@ -16,14 +16,14 @@ import java.util.List;
 
 public class TestJava {
     public static void main(String[] args) {
-//        String a = "201810";
+        String a = "201810";
 //        System.out.println(a.substring(4));
-//        System.out.println(a.substring(0,4));
+        System.out.println(a.substring(0,1));
         System.out.println(11 / 2);
-        int a = 10;
+        int ax = 10;
         String ks = "#"+StringUtils.join(Arrays.asList("bbbb".split("")),"#")+"#";
         System.out.println(ks);
-        int b = a;
+        int b = ax;
         b = 3;
         System.out.println(a+"--"+b);
 
