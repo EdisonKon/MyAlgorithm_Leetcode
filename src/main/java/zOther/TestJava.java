@@ -53,7 +53,7 @@ public class TestJava {
         StringBuilder ac = new StringBuilder("avc");//线程不安全
         sv.reverse();
         ac.reverse();
-
+        System.out.println(1235%100);
 //        System.out.println(Integer.parseInt("888888888888"));
 
 

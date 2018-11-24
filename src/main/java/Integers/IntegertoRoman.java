@@ -55,15 +55,134 @@ public class IntegertoRoman {
     public IntegertoRoman() {
     }
     /**
-     *
+     *挨个处理的方法
+     * Runtime: 43 ms, faster than 89.75% of Java online submissions for Integer to Roman.
      * */
     public String intToRoman(int num) {
+        if(num > 3999 || num <1){
+            return "";
+        }
+        int curInx = 0;
+        String rst = "";
+        //处理 千 的情况
+        curInx = num/1000;
+        for (int i = 0; i < curInx; i++) {
+            rst += "M";
+        }
+        //处理 百 的情况
+        curInx = (num%1000/100);
+        if(curInx!=0){//不等于0 才计算
+            if(curInx < 4){
+                for (int i = 0; i < curInx; i++) {
+                    rst += "C";
+                }
+            }else if(curInx == 4){
+                rst += "C"+"D";
+            }else if(curInx == 5){
+                rst += "D";
+            }else if(curInx == 6){
+                rst += "D"+"C";
+            }else if(curInx > 6 && curInx < 9){
+                rst += "D";
+                for (int i = 5; i < curInx; i++) {
+                    rst += "C";
+                }
+            }else{
+                rst += "C" + "M";
+            }
+        }
+        //处理 十 的情况
+        curInx = (num%100/10);
+        if(curInx!=0){//不等于0 才计算
+            if(curInx < 4){
+                for (int i = 0; i < curInx; i++) {
+                    rst += "X";
+                }
+            }else if(curInx == 4){
+                rst += "X"+"L";
+            }else if(curInx == 5){
+                rst += "L";
+            }else if(curInx == 6){
+                rst += "L"+"X";
+            }else if(curInx > 6 && curInx < 9){
+                rst += "L";
+                for (int i = 5; i < curInx; i++) {
+                    rst += "X";
+                }
+            }else{
+                rst += "X" + "C";
+            }
+        }
+        //处理 个 的情况
+        curInx = num%10;
+        if(curInx!=0){//不等于0 才计算
+            if(curInx < 4){
+                for (int i = 0; i < curInx; i++) {
+                    rst += "I";
+                }
+            }else if(curInx == 4){
+                rst += "I"+"V";
+            }else if(curInx == 5){
+                rst += "V";
+            }else if(curInx == 6){
+                rst += "V"+"I";
+            }else if(curInx > 6 && curInx < 9){
+                rst += "V";
+                for (int i = 5; i < curInx; i++) {
+                    rst += "I";
+                }
+            }else{
+                rst += "I" + "X";
+            }
+        }
 
-        return "";
+        return rst;
     }
 
+    /**
+     *转换 成for处理 精简代码
+     *Runtime: 59 ms, faster than 43.26% of Java online submissions for Integer to Roman.
+     * */
+    public String intToRoman2(int num) {
+        if (num > 3999 || num < 1) {
+            return "";
+        }
+        String rst = "";
+        int elm = 10;
+        int curInx = num;
+        int cubit = 1;
+        String[] index = {"","I","V","X","L","C","D","M","M"};
+        while (elm <= 10000){
+            curInx = num%elm/(elm/10);
+            elm = elm * 10 ;
+            if(curInx!=0){//不等于0 才计算
+                if(curInx < 4){
+                    for (int i = 0; i < curInx; i++) {
+                        rst = index[cubit]+rst;
+                    }
+                }else if(curInx == 4){
+                    rst = index[cubit]+index[cubit+1]+rst;
+                }else if(curInx == 5){
+                    rst = index[cubit+1]+rst;
+                }else if(curInx == 6){
+                    rst = index[cubit+1]+index[cubit]+rst;
+                }else if(curInx > 6 && curInx < 9){
+                    for (int i = 5; i < curInx; i++) {
+                        rst = index[cubit]+rst;
+                    }
+                    rst = index[cubit +1]+rst;
+                }else{
+                    rst = index[cubit] + index[cubit+2]+rst;
+                }
+            }
+            cubit += 2;
+        }
+        return rst;
+    }
     @Test
     public void test(){
-        intToRoman(1994);
+        System.out.println(intToRoman2(58));
+//        System.out.println(intToRoman2(1994));
+//        System.out.println(intToRoman2(1000));
     }
 }
