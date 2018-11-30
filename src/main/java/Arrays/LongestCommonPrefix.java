@@ -46,7 +46,7 @@ public class LongestCommonPrefix {
             return "";
         }
         List<String> list = Arrays.asList(strs);
-        Collections.sort(list,new myCompa());
+        Collections.sort(list,new MyCompa());
         String rst = "";
         String[] curArr = new String[list.get(0).length()];
         for (int i = 0; i <curArr.length; i++) {
@@ -87,7 +87,7 @@ public class LongestCommonPrefix {
         }
         return temp;
     }
-    class myCompa implements Comparator<String>{
+    class MyCompa implements Comparator<String>{
         @Override
         public int compare(String o1, String o2) {
             return o1.length() - o2.length();
