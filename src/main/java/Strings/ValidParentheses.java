@@ -2,6 +2,8 @@ package Strings;
 
 import org.junit.Test;
 
+import java.util.Stack;
+
 /**
  * @Author dekai.kong
  * @description: 难度 Easy
@@ -80,6 +82,27 @@ public class ValidParentheses {
             }
         }
         return index == 0;
+    }
+
+    /**
+     * 超屌的leetcode解法
+     * 用栈 压入弹出
+     * @param s
+     * @return
+     */
+    public boolean isValid2(String s) {
+        Stack<Character> stack = new Stack<Character>();
+        for (char c : s.toCharArray()) {
+            if (c == '(')
+                stack.push(')');
+            else if (c == '{')
+                stack.push('}');
+            else if (c == '[')
+                stack.push(']');
+            else if (stack.isEmpty() || stack.pop() != c)
+                return false;
+        }
+        return stack.isEmpty();
     }
 
     @Test
