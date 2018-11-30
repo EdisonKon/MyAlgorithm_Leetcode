@@ -2,6 +2,9 @@ package LinkedList;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * Medium
@@ -28,45 +31,65 @@ public class RemoveNthNodeFromEndofList {
 
     }
     /**
-     * O(n) 未优化
-     * Runtime: 40 ms, faster than 30.65% of Java online submissions for Add Two Numbers.
+     * O(n)
+     * Runtime: 6 ms, faster than 99.10% of Java online submissions for Remove Nth Node From End of List.
      */
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
-
-        return null;
+        List<ListNode> listtem = new ArrayList<>();
+        ListNode rst = head;
+        int len = 0;
+        while(rst!=null){
+            len++;
+            if(listtem.size()==n+1){//取第n个node的前一个当list的0
+                listtem.remove(0);//如果等于n个+1个 删除前一个
+            }
+            listtem.add(rst);//把后一个添加进来
+            rst = rst.next;
+        }
+        if(n == len){
+            head = listtem.size()>1?listtem.get(1):null;
+        }else{
+            listtem.get(0).next = listtem.get(0).next.next;
+        }
+        return head;
     }
+
+    /**
+     * 5 ms leetcode 答案,用2个listnode 一个做计数,另一个取计数剩下的挪动
+     * @param head
+     * @param n
+     * @return
+     */
+    public ListNode removeNthFromEnd2(ListNode head, int n) {
+        ListNode Dummy=new ListNode(0);
+        Dummy.next=head;
+        ListNode first=Dummy;
+        ListNode second=Dummy;
+        for (int i=0;i<=n;i++){
+            first=first.next;
+        }
+        while (first!=null)
+        {
+            first=first.next;
+            second=second.next;
+        }
+        second.next=second.next.next;
+        return Dummy.next;
+    }
+
     @Test
     public void test(){
-        int[] a = {2,4,4,4};
-        int[] b = {5,6,5};
+//        int[] a = {1,2,3,4,5};int tar = 2;
+        int[] a = {1};int tar = 1;
         ListNode l1 = new ListNode(a[0]);
-        ListNode l2 = new ListNode(b[0]);
         ListNode tem = l1;
         for(int i=1;i<a.length;i++){
             ListNode lx = new ListNode(a[i]);
             tem.next = lx;
             tem = tem.next;
         }
-        tem = l2;
-        for(int i=1;i<b.length;i++){
-            ListNode lx = new ListNode(b[i]);
-            tem.next = lx;
-            tem = tem.next;
-        }
-//        ListNode l1 = new ListNode(2);
-//        ListNode l11 = new ListNode(4);
-//        ListNode l111 = new ListNode(4);
-//        ListNode l1111 = new ListNode(4);
-//        l1.next = l11;
-//        l11.next = l111;
-//        l111.next = l1111;
-//        ListNode l2 = new ListNode(5);
-//        ListNode l22 = new ListNode(6);
-//        ListNode l222 = new ListNode(5);
-//        l2.next = l22;
-//        l22.next = l222;
 
-        removeNthFromEnd(l1,2);
+        removeNthFromEnd(l1,tar);
     }
 }
