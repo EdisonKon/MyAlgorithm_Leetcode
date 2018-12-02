@@ -2,9 +2,6 @@ package LinkedList;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * Medium
@@ -26,11 +23,31 @@ public class SwapNodesinPairs {
 
     }
     /**
+     * self
+     * Runtime: 2 ms, faster than 100.00% of Java online submissions for Swap Nodes in Pairs.
+     */
+    public ListNode swapPairs2(ListNode head) {
+        ListNode newHead = new ListNode(0);
+        newHead.next = head;
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode l1 = newHead;
+        while(l1.next!=null && l1.next.next!=null){
+            ListNode l2 = l1.next.next;
+            l1.next.next = l2.next;
+            l2.next = l1.next;
+            l1.next = l2;
+            l1 = l2.next;
+        }
+        return newHead.next;
+    }
+    /**
      * O(n)
      * Runtime: 2 ms, faster than 100.00% of Java online submissions for Swap Nodes in Pairs.
      * from leetcode
-     * TODO doself
      */
+
 
     public ListNode swapPairs(ListNode head) {
         ListNode newHead = new ListNode(0);
@@ -62,6 +79,6 @@ public class SwapNodesinPairs {
             tem = tem.next;
         }
 
-        swapPairs(l1);
+        swapPairs2(l1);
     }
 }
