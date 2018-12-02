@@ -27,29 +27,27 @@ public class SwapNodesinPairs {
     }
     /**
      * O(n)
-     * Runtime: 6 ms, faster than 99.10% of Java online submissions for Remove Nth Node From End of List.
+     * Runtime: 2 ms, faster than 100.00% of Java online submissions for Swap Nodes in Pairs.
+     * from leetcode
+     * TODO doself
      */
 
     public ListNode swapPairs(ListNode head) {
-        ListNode node = new ListNode(0);
-        ListNode secd = head;
-        if(head!=null && head.next!=null){
-            secd = head.next;
+        ListNode newHead = new ListNode(0);
+        newHead.next = head;
+        ListNode l1 = newHead;
+        if (head == null || head.next == null) {
+            return head;
         }
-        node.next = secd;
+        do {
+            ListNode l2 = l1.next.next;
+            l1.next.next = l2.next;
+            l2.next = l1.next;
+            l1.next = l2;
+            l1 = l2.next;
+        } while (l1.next != null && l1.next.next != null);
 
-        ListNode tem;
-        while(head!=null){
-            if(head.next!=null){
-                tem = head.next;
-                head.next = tem.next;
-                tem.next = head;
-            }
-            head = head.next;
-
-        }
-
-        return node.next;
+        return newHead.next;
     }
 
     @Test
