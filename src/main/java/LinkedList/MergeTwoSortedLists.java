@@ -23,24 +23,26 @@ public class MergeTwoSortedLists {
     }
     /**
      * O(n)
-     * Runtime: 6 ms, faster than 99.10% of Java online submissions for Remove Nth Node From End of List.
+     * Runtime: 9 ms, faster than 69.98% of Java online submissions for Merge Two Sorted Lists.
      */
 
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode head = new ListNode(0);
         ListNode ret = head;
         List<ListNode> list = new ArrayList<>();
-        while(l1!=null && l2!=null){
+//        while(l1!=null && l2!=null){
+//            list.add(l1);
+//            list.add(l2);
+//            l1 = l1.next;
+//            l2 = l2.next;
+//        }
+        while(l1!=null){
             list.add(l1);
-            list.add(l2);
             l1 = l1.next;
-            l2 = l2.next;
         }
-        if(l1!=null){
-            list.add(l1);
-        }
-        if(l2!=null){
+        while(l2!=null){
             list.add(l2);
+            l2 = l2.next;
         }
         Collections.sort(list,new MyCompax());
         for (int i = 0; i < list.size(); i++) {
@@ -66,7 +68,7 @@ public class MergeTwoSortedLists {
             tem.next = lx;
             tem = tem.next;
         }
-        int[] a1 = {1,3,4};
+        int[] a1 = {5};
         ListNode l2 = new ListNode(a1[0]);
         tem = l2;
         for(int i=1;i<a1.length;i++){
