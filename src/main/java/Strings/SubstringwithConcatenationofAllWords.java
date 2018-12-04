@@ -36,6 +36,7 @@ public class SubstringwithConcatenationofAllWords {
 
     /**
      * leetcode 10ms 答案
+     * 秒杀100%
      */
     public List<Integer> findSubstring2(String s, String[] words) {
         List<Integer> ans = new LinkedList<>();
@@ -72,7 +73,7 @@ public class SubstringwithConcatenationofAllWords {
     }
 
     /**
-     * 超时了/669ms Your runtime beats 5.05 % of java submissions.
+     * Runtime: 93 ms, faster than 70.24% of Java online submissions for Substring with Concatenation of All Words.
      * @param s
      * @param words
      * @return
@@ -95,11 +96,15 @@ public class SubstringwithConcatenationofAllWords {
             int cur = i;
             int curlen = wlen;
 
+            if(i+wlen*len-1 > s.length()){
+                break;
+            }
             Map<String,Integer> map2 = new HashMap<>();
             String temv = s.substring(cur,cur+len);
             while(map.containsKey(temv)){
-                map2.put(temv, map2.getOrDefault(temv, 0) + 1);
-                if (curlen > 0 && map2.get(temv) <= map.get(temv)) {
+                int valx = map2.getOrDefault(temv, 0) + 1;
+                map2.put(temv, valx);
+                if (curlen > 0 && valx <= map.get(temv)) {
                     curlen -- ;
                     cur += len;
                     if(cur+len>s.length()){
@@ -114,7 +119,6 @@ public class SubstringwithConcatenationofAllWords {
                 rst.add(i);
             }
         }
-
         return rst;
     }
 
