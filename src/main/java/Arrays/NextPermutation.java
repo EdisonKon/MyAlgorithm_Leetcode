@@ -73,7 +73,9 @@ public class NextPermutation {
     }
 
     /**
-     * Runtime: 9 ms, faster than 85.19% of Java online submissions for Next Permutation.
+     * Runtime: 8 ms, faster than 99.10% of Java online submissions for Next Permutation.
+     * 最终优化
+     * 先从后往前遍历最大值，然后从后边遍历，碰见有比最大值前面一个值大的就替换，然后reverse最大值后边的所有int[]
      */
     public void nextPermutation2(int[] nums) {
         int tem;
@@ -82,21 +84,15 @@ public class NextPermutation {
             maxidex -- ;
         }
         if(maxidex == 0){
-            Arrays.sort(nums,0,nums.length);
-        }
-        ff:
-        for (int j = maxidex; j > 0; j--) {
-            if(nums[j]>nums[j-1]){
-                if(j < nums.length-1){
-                    Arrays.sort(nums, j, nums.length);
-                }
-                for (int i = j; i < nums.length; i++) {
-                    if(nums[i]>nums[j-1]){
-                        tem = nums[i];
-                        nums[i] = nums[j-1];
-                        nums[j-1] = tem;
-                        break ff;
-                    }
+            Arrays.sort(nums);
+        }else{
+            for (int i = nums.length-1; i >= maxidex; i--) {
+                if(nums[i]>nums[maxidex-1]){
+                    tem = nums[i];
+                    nums[i] = nums[maxidex-1];
+                    nums[maxidex-1] = tem;
+                    myReverse(nums,maxidex,nums.length);
+                    break ;
                 }
             }
         }
@@ -109,7 +105,8 @@ public class NextPermutation {
 //        nextPermutation(new int[]{5,4,3,2,1});
 //        int[] a = new int[]{1,2,1,3,4};
 //        int[] a = new int[]{1,2,4,3,1};
-        int[] a = new int[]{1,2,4,4,1};
+//        int[] a = new int[]{1,2,4,4,1};
+        int[] a = new int[]{1};
 //        int[] a = new int[]{5,1,1};
         nextPermutation2(a);
         System.out.println(a);
