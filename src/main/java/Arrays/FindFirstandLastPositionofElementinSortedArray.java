@@ -30,6 +30,26 @@ public class FindFirstandLastPositionofElementinSortedArray {
     public FindFirstandLastPositionofElementinSortedArray() {
 
     }
+    public int[] searchRange(int[] nums, int target) {
+        int[] res = {-1,-1};
+        if(nums.length == 0) {return res;}
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) left = mid + 1;
+            else right = mid;
+        }
+        if (nums[right] != target) return res;
+        res[0] = right;
+        right = nums.length;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] <= target) left = mid + 1;
+            else right= mid;
+        }
+        res[1] = left - 1;
+        return res;
+    }
 /*
     public int[] searchRange(int[] nums, int target) {
         int[] rst = {-1,-1};
@@ -68,22 +88,58 @@ public class FindFirstandLastPositionofElementinSortedArray {
         }
     }
     */
+//    1,2,2,3,4,4,4  4
+    /*
     public int[] searchRange(int[] nums, int target) {
         int[] rst = {-1,-1};
         if(nums.length == 0) {return rst;}
         rst = find(nums,0,nums.length,target,rst);
         return rst;
     }
+
+    public int[] find(int[] nums,int left,int right,int target,int[] cur){
+        int mid = (right - left)/2 + left;
+        int start = left;
+        int end = right;
+        if(target == nums[mid]){
+            cur[0] = cur[0]>mid || cur[0] == -1?mid:cur[0];
+            cur[1] = cur[1]<mid || cur[1] == -1?mid:cur[1];
+            if(nums[mid] == nums[end-1]){
+                cur[1] = end-1;
+                return cur;
+            }
+            if(nums[start] == nums[mid]){
+                cur[0] = start;
+                return cur;
+            }
+            if(left == right){
+                return cur;
+            }
+        }
+        if(target < nums[mid]){
+            return find(nums,start,mid-1,target,cur);
+        }
+        else{
+            return find(nums,mid+1,end,target,cur);
+        }
+    }
+    /*
     public int[] find(int[] nums,int left,int right,int target,int[] cur){
         int mid = (right - left)/2 + left;
         int start = left;
         int end = right;
         if(nums[mid] == nums[end]){
             cur[0] = mid;
+            if(left == right){
+                return cur;
+            }
             find(nums,start,mid,target,cur);
         }
         if(nums[mid] == nums[start]){
             cur[1] = mid;
+            if(left == right){
+                return cur;
+            }
             find(nums,mid,end,target,cur);
         }
         if(nums[mid] == target){
@@ -93,19 +149,19 @@ public class FindFirstandLastPositionofElementinSortedArray {
             if(cur[1] < mid || cur[1] == -1){
                 cur[1] = mid;
             }
-            if(left >= right){
+            if(left == right){
                 return cur;
             }
         }
         if(target < nums[mid]){
-            find(nums,start,mid,target,cur);
+            find(nums,start,mid-1,target,cur);
         }
         if(target > nums[mid]){
-            find(nums,mid,end,target,cur);
+            find(nums,mid+1,end,target,cur);
         }
         return cur;
     }
-
+*/
     @Test
     public void test() {
         searchRange(new int[]{1,2,2,3,4,4,4},4);
