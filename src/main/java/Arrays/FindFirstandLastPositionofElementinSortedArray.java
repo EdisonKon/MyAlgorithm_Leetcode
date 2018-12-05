@@ -30,6 +30,13 @@ public class FindFirstandLastPositionofElementinSortedArray {
     public FindFirstandLastPositionofElementinSortedArray() {
 
     }
+
+    /**
+     * Runtime: 4 ms, faster than 82.04% of Java online submissions for Find First and Last Position of Element in Sorted Array.
+     * @param nums
+     * @param target
+     * @return
+     */
     public int[] searchRange(int[] nums, int target) {
         int[] res = {-1,-1};
         if(nums.length == 0) {return res;}
