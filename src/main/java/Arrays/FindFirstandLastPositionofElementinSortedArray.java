@@ -78,6 +78,14 @@ public class FindFirstandLastPositionofElementinSortedArray {
         int mid = (right - left)/2 + left;
         int start = left;
         int end = right;
+        if(nums[mid] == nums[end]){
+            cur[0] = mid;
+            find(nums,start,mid,target,cur);
+        }
+        if(nums[mid] == nums[start]){
+            cur[1] = mid;
+            find(nums,mid,end,target,cur);
+        }
         if(nums[mid] == target){
             if (cur[0]> mid || cur[0] == -1){
                 cur[0] = mid;
@@ -85,27 +93,25 @@ public class FindFirstandLastPositionofElementinSortedArray {
             if(cur[1] < mid || cur[1] == -1){
                 cur[1] = mid;
             }
-            if(left == right){
+            if(left >= right){
                 return cur;
             }
-            find(nums,start,mid,target,cur);
-            find(nums,mid,end,target,cur);
         }
         if(target < nums[mid]){
-            find(nums,start,mid-1,target,cur);
+            find(nums,start,mid,target,cur);
         }
         if(target > nums[mid]){
-            find(nums,mid+1,end,target,cur);
+            find(nums,mid,end,target,cur);
         }
         return cur;
     }
 
     @Test
     public void test() {
-//        searchRange(new int[]{1,2,2,3,4,4,4},4);
+        searchRange(new int[]{1,2,2,3,4,4,4},4);
         searchRange(new int[]{5,7,7,8,8,10},8);
-//        searchRange(new int[]{5,7,7,8,8,10},6);
-//        searchRange(new int[]{1},1);
+        searchRange(new int[]{5,7,7,8,8,10},6);
+        searchRange(new int[]{1},1);
         // 4 6, 3,4 -1,-1 0,0
     }
 }
