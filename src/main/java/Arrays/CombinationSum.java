@@ -55,22 +55,18 @@ public class CombinationSum {
      * @return
      */
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        Arrays.sort(candidates);
-        Set<Integer> set = new HashSet();
+        Map<Integer,List<List<Integer>>> mapkv = new HashMap<>();
         Set<String> boo= new HashSet<>();
-        for (int i = 0; i < candidates.length; i++) {
-            set.add(candidates[i]);
-        }
         List<List<Integer>> rst = new ArrayList<>();
         for (int i = 0; i < candidates.length; i++) {
             int cur = candidates[i];
             List<Integer> add = new ArrayList<>();
-            doCheck(cur,add,set,rst,target,boo,candidates);
+            doCheck(cur,add,rst,target,boo,mapkv);
         }
         return rst;
 
     }
-    public void doCheck(int cur,List<Integer> add, Set<Integer> set,List<List<Integer>> rst,int selftar,Set<String> boo,int[] candidates){
+    public void doCheck(int cur,List<Integer> add,List<List<Integer>> rst,int selftar,Set<String> boo,Map<Integer,List<List<Integer>>> mapkv){
         int val = 0;
         for (int j = 0; j < selftar / cur; j++) {
             val += cur;
@@ -79,7 +75,7 @@ public class CombinationSum {
             if(t_v<=0){
                 break;
             }
-            if(set.contains(t_v)){
+            if(mapkv.getOrDefault(t_v,null)!=null){
                 List<Integer> addin = new ArrayList<>();
                 addin.addAll(add);
                 addin.add(t_v);
@@ -89,12 +85,9 @@ public class CombinationSum {
                 }
                 rst.add(addin);
             }else{
-                if(t_v < candidates[0]){
-                    break;
-                }
                 List x = new ArrayList<>();
                 x.addAll(add);
-                doCheck(cur,x,set,rst,t_v,boo,candidates);
+                doCheck(cur,x,rst,t_v,boo,mapkv);
                 for (int i = 0; i < rst.size(); i++) {
                     rst.get(i).addAll(add);
                 }
