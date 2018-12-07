@@ -21,6 +21,39 @@ public class ValidSudoku {
     }
 
     /**
+     * Runtime: 15 ms, faster than 92.16% of Java online submissions for Valid Sudoku.
+     * @param board
+     * @return
+     */
+    public boolean isValidSudoku4(char[][] board) {
+        for (int i = 0; i < 9; i++) {
+            Set<Character> setrow = new HashSet<>(9);
+            Set<Character> setcol = new HashSet<>(9);
+            Set<Character> setsqr = new HashSet<>(9);
+            for (int j = 0; j < 9; j++) {
+                if('.' != board[i][j]){
+                    if(!setrow.add(board[i][j])){
+                        return false;
+                    }
+                }
+                if('.' != board[j][i]){
+                    if(!setcol.add(board[j][i])){
+                        return false;
+                    }
+                }
+                int x = (i / 3) * 3 + j / 3;
+                int y = (i % 3) * 3 + j % 3;
+                if('.' != board[x][y]){
+                    if(!setsqr.add(board[x][y])){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
      * leetcode
      * Runtime: 12 ms, faster than 99.10% of Java online submissions for Valid Sudoku.
      * Runtime: 15ms, faster than 92.16% of Java online submissions for Valid Sudoku.
@@ -187,8 +220,9 @@ public class ValidSudoku {
 
                 
         System.out.println(isValidSudoku(x));
-        System.out.println(isValidSudoku(x1));
-        System.out.println(isValidSudoku(x2));
+        System.out.println(isValidSudoku4(x));
+//        System.out.println(isValidSudoku(x1));
+//        System.out.println(isValidSudoku(x2));
     }
 }
 
