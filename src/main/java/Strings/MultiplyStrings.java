@@ -47,10 +47,20 @@ public class MultiplyStrings {
 
     }
 
-    public String multiply(String num1, String num2) {
+    /**
+     * Runtime: 56 ms, faster than 7.87% of Java online submissions for Multiply Strings.
+     * @param num1
+     * @param num2
+     * @return
+     */
+
+    public String multiply2(String num1, String num2) {
         Map<Character,List<Integer>> mapCi = new HashMap<>(10);
         List<Integer> nums = new ArrayList<>();//存结果
         int isUp = 0;
+        if(num1.equals("0") || num2.equals("0")){
+            return "0";
+        }
         for (int i = num2.length()-1; i >= 0; i--) {
             if(num2.charAt(i) == '0'){continue;}//排出0的情况
             List<Integer> mulend = new ArrayList<>();
@@ -62,6 +72,10 @@ public class MultiplyStrings {
                     int val = Character.getNumericValue(num2.charAt(i))*Character.getNumericValue(num1.charAt(j)) + isUp;
                     isUp = val/10;
                     mulval.add(0,val%10);
+                }
+                if (isUp>0){
+                    mulval.add(0,isUp);
+                    isUp = 0;
                 }
                 mapCi.put(num2.charAt(i),mulval);
             }
@@ -76,12 +90,17 @@ public class MultiplyStrings {
                 for (int j = lenm-1; j >= 0; j--) {
                     int index = j-(lenm - len);
                     if(index<0){
-                        nums.add(0,mulend.get(j)+addUp);
+                        int val = mulend.get(j)+addUp;
+                        nums.add(0,val%10);
+                        addUp = val/10;
                     }else {
                         int val = nums.get(j-(lenm - len)) + mulend.get(j)+addUp;
                         nums.set(j-(lenm - len),val%10);
                         addUp = val/10;
                     }
+                }
+                if (addUp>0){
+                    nums.add(0,addUp);
                 }
             }else{
                 nums.addAll(mulend);
@@ -97,10 +116,58 @@ public class MultiplyStrings {
         return sb.toString();
     }
 
+    /**
+     * Runtime: 10 ms, faster than 99.97% of Java online submissions for Multiply Strings.
+     * @param num1
+     * @param num2
+     * @return
+     */
+    public String multiply(String num1, String num2) {
+        if(num1 == null || num2 == null || num1.length() == 0 || num2.length() == 0) return "0";
+        if(num1.equals("0") || num2.equals("0")) return "0";
+        int isUp = 0;
+        char[] c1 = num1.toCharArray();
+        char[] c2 = num2.toCharArray();
+        int m1 = c1.length, m2 = c2.length;
+        int [] res = new int[m1 + m2];
+        for (int i = m1-1; i >= 0; i--) {
+                for (int j = m2-1; j >= 0; j--) {
+                    int a = c1[i] - '0';
+                    int b = c2[j] - '0';
+                    int sum = a * b;
+                    res[i + j + 1] += sum;
+                }
+        }
+        for(int i = m1 + m2 - 1; i >= 0; i --){
+            res[i] += isUp;
+            isUp = res[i]/10;
+            res[i] %= 10;
+        }
+        int i = 0;
+        while(i < m1 + m2){
+            if(res[i] == 0) {
+                i++;
+            }else {
+                break;
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for(; i < m1 + m2; i ++) {
+            sb.append(res[i]);
+        }
+        if(sb.length() == 0 || sb.charAt(0) == '0') {
+            return "0";
+        }
+
+        return sb.toString();
+    }
+
     @Test
     public void test() {
-//        System.out.println(multiply("123","456"));
-        System.out.println(multiply("9","9"));
+        System.out.println(multiply("123","456"));
+//        System.out.println(multiply("237","284"));
+//        System.out.println(multiply("123456789","987654321"));
+        System.out.println(multiply("0","52"));
     }
 }
 
