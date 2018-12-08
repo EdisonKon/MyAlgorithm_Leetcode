@@ -36,7 +36,7 @@ import java.util.*;
  *   [1,2,2],
  *   [5]
  * ]
- * 有重复的,需要进行消重
+ * 有重复的,需要进行消重,本index的值不能重复
  * 讲解
  * https://www.youtube.com/watch?v=aBL-aNWNmB4&t=23s
  * TODO 多刷(经典递归)
