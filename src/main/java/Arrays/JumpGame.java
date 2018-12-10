@@ -38,22 +38,19 @@ public class JumpGame {
         return doRecursive(0,nums);
     }
     public boolean doRecursive(int index,int[] nums){
-        for (int i = 0; i < nums.length; ) {
-            int curinx = i+nums[i];
-            if(curinx >= nums.length-1){
-                return true;
-            }else if(nums[curinx] == 0){
-                for (int j = nums[i]-1; j > 0; j++) {
-                    if(nums[curinx-1] > 0){
-                        i = nums[j]-1+ nums[nums[j]-1];
-                        doRecursive(i,nums);
-                        i = i - (nums[j]-1+ nums[nums[j]-1]);
-                    }
+        int curinx = index+nums[index];
+        if(curinx >= nums.length-1){
+            return true;
+        }else if(nums[curinx] == 0){
+            for (int j = nums[index]-1; j > 0; j++) {
+                if(nums[curinx-1] > 0){
+                    index = j + nums[nums[j]-1];
+                    doRecursive(index,nums);
                 }
-                return false;
-            }else{
-                i = curinx;
             }
+            return false;
+        }else{
+            index = curinx;
         }
         return false;
     }
