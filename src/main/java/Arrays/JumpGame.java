@@ -43,10 +43,12 @@ public class JumpGame {
             if(curinx >= nums.length-1){
                 return true;
             }else if(nums[curinx] == 0){
-                for (int j = nums[i]-1; j > 0; j++) {
+                for (int j = nums[i]-1; j > 0; j--) {
                     if(nums[curinx-1] > 0){
-                        i = j + nums[nums[j]-1];
-                        doRecursive(i,nums);
+                        i = j + i;
+                        if(doRecursive(i,nums)){
+                            return true;
+                        }
                     }
                 }
                 return false;
