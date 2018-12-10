@@ -64,7 +64,8 @@ public class JumpGame {
     @Test
     public void test() {
 //        System.out.println(canJump(new int[]{2,3,0,1,0,4}));
-        System.out.println(canJump(new int[]{1,3,3,1,0,4}));
+//        System.out.println(canJump(new int[]{1,3,3,1,0,4}));
+        System.out.println(canJump(new int[]{3,0,8,2,0,0,1}));
     }
 }
 
