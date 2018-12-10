@@ -2,6 +2,8 @@ package Arrays;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * @description: 描述 Medium
  * @author: dekai.kong
@@ -34,7 +36,12 @@ public class JumpGame {
 
     }
 
-    public boolean canJump(int[] nums) {
+    /**
+     * 递归法 未完成
+     * @param nums
+     * @return
+     */
+    public boolean canJump2(int[] nums) {
         return doRecursive(0,nums);
     }
     public boolean doRecursive(int index,int[] nums){
@@ -61,11 +68,77 @@ public class JumpGame {
         return false;
     }
 
+    /**
+     * Runtime: 5 ms, faster than 74.77% of Java online submissions for Jump Game.
+     * @param nums
+     * @return
+     */
+    public boolean canJump23(int[] nums) {
+        int[] myidex = new int[nums.length];
+        Arrays.fill(myidex,0);
+        int curinx = 0;
+        while(curinx<nums.length-1){
+            curinx = curinx+nums[curinx];
+            if(curinx == 0){
+                return false;
+            }
+            if(curinx >= nums.length-1){
+                return true;
+            }else if(nums[curinx] == 0){
+                myidex[curinx] = -1;
+                int backint = 0;
+                for (int i = curinx; i >= 0 ; i--) {
+                    if(myidex[i] == -1) {
+                        backint += -1;
+                        continue;
+                    }else if (myidex[i] == 1||myidex[i] == 0){
+                        if(backint + nums[i] > 0){
+                            myidex[i] = 1;
+                            curinx = i + nums[i];
+                            break;
+                        }else{
+                            myidex[i] = -1;
+                            backint += -1;
+                        }
+                    }
+                    curinx = i;
+                }
+                if(curinx == 0){
+                    return false;
+                }
+            }else{
+                myidex[curinx] = 1;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * leetcode
+     * @param arr
+     * @return
+     */
+    public boolean canJump(int[] arr) {
+        int maxindex=arr[0];
+        int n=arr.length;
+        for (int i = 1; i <n; i++) {
+            if(i<=maxindex)
+            {
+                if(maxindex<i+arr[i])
+                    maxindex=i+arr[i];
+            }
+        }
+        if(maxindex>=n-1)
+            return true;
+        else
+            return false;
+    }
     @Test
     public void test() {
-//        System.out.println(canJump(new int[]{2,3,0,1,0,4}));
-//        System.out.println(canJump(new int[]{1,3,3,1,0,4}));
+        System.out.println(canJump(new int[]{2,3,0,1,0,4}));
+        System.out.println(canJump(new int[]{1,3,3,1,0,4}));
         System.out.println(canJump(new int[]{3,0,8,2,0,0,1}));
+        System.out.println(canJump(new int[]{1,0,2}));
     }
 }
 
