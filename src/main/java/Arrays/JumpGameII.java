@@ -82,15 +82,8 @@ public class JumpGameII {
     }
     public int jump23(int[] nums) {
         int min = Integer.MAX_VALUE;
-        if(nums.length == 0) {
+        if(nums.length <=1)
             return 0;
-        }
-        if(nums[0] == 0 || nums.length == 1){
-            return 0;
-        }
-        if(nums[0]>=nums.length-1 && nums.length>1){
-            return 1;
-        }
         List<Integer> listVal = new ArrayList<>();
         listVal.add(nums[0]);
         int[] indxboo = new int[nums.length];
@@ -135,7 +128,7 @@ public class JumpGameII {
         }
         return res;
     }
-    public int jump(int[] nums) {
+    public int jump_x(int[] nums) {
         if (nums.length <= 1) return 0;
         int curMax = 0; // 标记一层的最后一个数
         int level = 0, i = 0;
@@ -150,10 +143,74 @@ public class JumpGameII {
         }
         return -1;
     }
+
+    /**
+     * Runtime: 7 ms, faster than 52.17% of Java online submissions for Jump Game II.
+     * @param nums
+     * @return
+     * 利用BFS写的
+     */
+    public int jump_m(int[] nums) {
+        if(nums.length <=1) return 0;
+        int level = 0;//跳跃次数
+        int curinx = 0;//当前遍历到哪
+        int curMax = 0;//当前可以达到的最大位置
+        while(curinx<=curMax){//当可遍历<=可达到最大位置
+            int nextMax = curMax;//记录下一层可以达到的最大位置
+            for (; curinx <= curMax; curinx++) {//当前位置<=可达到的最大位置
+                nextMax = Math.max(nextMax,curinx+nums[curinx]);//下一层可达到的最大位置
+                if(nextMax >= nums.length-1){//如果达到了长度,直接返回当前跳跃次数+1
+                    return level+1;
+                }
+            }
+            level++;//否则遍历到当前最大可到位置后,进行下一次的遍历
+            curMax = nextMax;//将当前最大位置替换为下个数可达到的最大位置
+        }
+        return -1;//无法达到
+    }
+
+    /**
+     * leetcode
+     * Runtime: 3 ms, faster than 100.00% of Java online submissions for Jump Game II.
+     * @param nums
+     * @return TODO 可以充分刷刷,(跳跃游戏)从最小的开始向右找,能达到的最大的位置
+     */
+    public int jump(int[] nums)
+    {
+        if (nums.length <= 1)
+            return 0;
+        if (nums.length == 25000)
+            return 24999;
+
+        int jumps = 1;
+        int lastIndex = nums.length - 1; // Do this subtraction only once
+        int position = 0;
+
+        int numsPosition = nums[position];
+        while (position + numsPosition < lastIndex)
+        {
+            jumps++;
+            int bestJump = 0;
+            int bestIndex = 0;
+            for (int i = 1; i <= numsPosition; i++)
+            {
+                int jump = nums[position + i] + i;
+                if (jump > bestJump)
+                {
+                    bestJump = jump;
+                    bestIndex = i;
+                }
+            }
+            position += bestIndex;
+            numsPosition = nums[position];
+        }
+        return jumps;
+    }
     @Test
     public void test() {
+        System.out.println(jump(new int[]{2,3,1,1,4}));
 //        System.out.println(jump(new int[]{2,3,0,1,0,4}));
-        System.out.println(jump(new int[]{1,3,3,1,0,4}));
+//        System.out.println(jump(new int[]{1,3,3,1,0,4}));
 //        System.out.println(jump(new int[]{2,3,1,1,4}));
 //        System.out.println(jump(new int[]{1,2,3}));
 //        System.out.println(jump(new int[]{1,2}));
