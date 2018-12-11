@@ -2,8 +2,6 @@ package Arrays;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-
 /**
  * @description: 描述 Medium
  * @author: dekai.kong
@@ -70,12 +68,14 @@ public class JumpGame {
 
     /**
      * Runtime: 5 ms, faster than 74.77% of Java online submissions for Jump Game.
+     * 去掉fill后
+     * Runtime: 4 ms, faster than 95.26% of Java online submissions for Jump Game.
      * @param nums
      * @return
      */
     public boolean canJump23(int[] nums) {
         int[] myidex = new int[nums.length];
-        Arrays.fill(myidex,0);
+//        Arrays.fill(myidex,0);
         int curinx = 0;
         while(curinx<nums.length-1){
             curinx = curinx+nums[curinx];
