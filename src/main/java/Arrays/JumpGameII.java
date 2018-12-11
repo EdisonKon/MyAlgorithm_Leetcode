@@ -80,7 +80,7 @@ public class JumpGameII {
         }
         return rst;
     }
-    public int jump(int[] nums) {
+    public int jump23(int[] nums) {
         int min = Integer.MAX_VALUE;
         if(nums.length == 0) {
             return 0;
@@ -123,11 +123,22 @@ public class JumpGameII {
         }
         return min;
     }
-
+    public int jump(int[] nums) {
+        int res = 0, n = nums.length, i = 0, cur = 0;
+        while (cur < n - 1) {
+            ++res;
+            int pre = cur;
+            for (; i <= pre; ++i) {
+                cur = Math.max(cur, i + nums[i]);
+            }
+            if (pre == cur) return -1; // May not need this
+        }
+        return res;
+    }
     @Test
     public void test() {
 //        System.out.println(jump(new int[]{2,3,0,1,0,4}));
-//        System.out.println(jump(new int[]{1,3,3,1,0,4}));
+        System.out.println(jump(new int[]{1,3,3,1,0,4}));
 //        System.out.println(jump(new int[]{2,3,1,1,4}));
 //        System.out.println(jump(new int[]{1,2,3}));
 //        System.out.println(jump(new int[]{1,2}));
@@ -135,7 +146,7 @@ public class JumpGameII {
 //        System.out.println(jump(new int[]{2,8,3,1,1,4}));
 //        System.out.println(jump(new int[]{3,0,8,2,0,0,1}));
 //        System.out.println(jump(new int[]{1,0,2}));
-        System.out.println(jump(new int[]{5,9,3,2,1,0,2,3,3,1,0,0}));
+//        System.out.println(jump(new int[]{5,9,3,2,1,0,2,3,3,1,0,0}));
     }
 }
 
