@@ -100,16 +100,17 @@ public class JumpGameII {
             for (int i = 0; i < listVal.size(); i++) {
                 curIndex += listVal.get(i);
             }
-
-            while(curIndex< nums.length-1 && nums[curIndex]!=0 && indxboo[curIndex]!=-1){
-                curTimes++;
-                listVal.add(nums[curIndex]);
-                curIndex += listVal.get(listVal.size()-1);
-                if(nums[curIndex] == 0){
+            if(indxboo[curIndex]!=-1){
+                int ininx = curIndex;
+                while(ininx< nums.length-1 && nums[ininx]!=0 && indxboo[curIndex] != -1){
+                    curTimes++;
+                    listVal.add(nums[curIndex]);
+                    ininx += listVal.get(listVal.size()-1);
+                }
+                if(nums[ininx] == 0){
                     indxboo[curIndex] = -1;
                 }
             }
-
             if(curIndex>= nums.length-1 || nums[curIndex]!=0){
                 min = Math.min(min,curTimes);
                 listVal.remove(listVal.size()-1);
