@@ -10,25 +10,22 @@ import java.util.List;
  * @description: 描述 Medium
  * @author: dekai.kong
  * @date: 2018-12-10 11:20
- * @from https://leetcode.com/problems/permutations/
- * Given a collection of distinct integers, return all possible permutations.
- *
- * Example:
- *
- * Input: [1,2,3]
- * Output:
- * [
- *   [1,2,3],
- *   [1,3,2],
- *   [2,1,3],
- *   [2,3,1],
- *   [3,1,2],
- *   [3,2,1]
- * ]
+ * @from https://leetcode.com/problems/permutations-ii/
+ * Given a collection of numbers that might contain duplicates, return all possible unique permutations.
+
+    Example:
+
+    Input: [1,1,2]
+    Output:
+    [
+    [1,1,2],
+    [1,2,1],
+    [2,1,1]
+    ]
  */
 
-public class Permutations {
-    public Permutations() {
+public class PermutationsII {
+    public PermutationsII() {
 
     }
 
@@ -41,6 +38,7 @@ public class Permutations {
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> rst = new ArrayList<>();
         List<Integer> list = new ArrayList<>();
+        Arrays.sort(nums);
         doRecursive(0,nums,list,rst);
         return rst;
     }
