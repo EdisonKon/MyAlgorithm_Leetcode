@@ -123,7 +123,7 @@ public class JumpGameII {
         }
         return min;
     }
-    public int jump(int[] nums) {
+    public int jump_g(int[] nums) {
         int res = 0, n = nums.length, i = 0, cur = 0;
         while (cur < n - 1) {
             ++res;
@@ -134,6 +134,21 @@ public class JumpGameII {
             if (pre == cur) return -1; // May not need this
         }
         return res;
+    }
+    public int jump(int[] nums) {
+        if (nums.length <= 1) return 0;
+        int curMax = 0; // 标记一层的最后一个数
+        int level = 0, i = 0;
+        while (i <= curMax) { // i比curMax还大说明不能继续走到下一层了
+            int furthest = curMax; // 标记下一层最远到哪儿
+            for (; i <= curMax; i++) {
+                furthest = Math.max(furthest, nums[i] + i);
+                if (furthest >= nums.length - 1) return level + 1;
+            }
+            level++;
+            curMax = furthest;
+        }
+        return -1;
     }
     @Test
     public void test() {
