@@ -57,6 +57,9 @@ public class TestJava {
 //        System.out.println(Integer.parseInt("888888888888"));
         char[] b123 = new char[9];
         System.out.println(b123);
+        char[]   data={'a','b','c'};
+        String  s=new   String(data);
+        System.out.println(s);
 
 
 
