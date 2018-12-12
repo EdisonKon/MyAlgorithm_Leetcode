@@ -25,13 +25,42 @@ public class TrappingRainWater {
     }
 
     public int trap(int[] height) {
-        
-        return 0;
+        int total = 0;
+        int start = 0;
+        int curtotal = 0;
+        for (int i = 0; i < height.length; i++) {
+            if(height[i] == 0){
+                if(start == 0){
+                    continue;
+                }
+            }else{
+                if(start ==0){
+                    start = i;
+                }else{
+                    if(height[i]<height[start]){
+                        if(i == height.length-1){
+                            int par = (i - start)*(height[start]-height[i]);
+                            curtotal+= height[start] - height[i] + par;
+                            if (curtotal>0){
+                                total += curtotal;
+                            }
+                        }else{
+                            curtotal+= height[start] - height[i];
+                        }
+
+                    }else{
+                        total += curtotal;
+                        start = i;
+                    }
+                }
+            }
+        }
+        return total;
     }
 
     @Test
     public void test() {
-
+        System.out.println(trap(new int[]{0,1,0,2,1,1,0,1}));
     }
 }
 
