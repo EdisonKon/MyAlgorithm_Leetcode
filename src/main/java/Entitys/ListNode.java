@@ -1,4 +1,4 @@
-package LinkedList;
+package Entitys;
 
 public class ListNode {
     int val;

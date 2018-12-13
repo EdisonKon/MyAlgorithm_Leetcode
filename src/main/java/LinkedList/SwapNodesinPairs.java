@@ -1,5 +1,6 @@
 package LinkedList;
 
+import Entitys.ListNode;
 import org.junit.Test;
 
 /**
