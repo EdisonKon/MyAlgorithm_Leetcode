@@ -32,10 +32,38 @@ public class MergeIntervals {
 
     }
 
+    /**
+     * Runtime: 12 ms, faster than 93.77% of Java online submissions for Merge Intervals.
+     * @param intervals
+     * @return
+     * 一次过
+     */
     public List<Interval> merge(List<Interval> intervals) {
         List<Interval> list = new ArrayList<>();
+        if(intervals.size()==0){
+            return list;
+        }
         Collections.sort(intervals,new IntervalsComp());
-
+        list.add(new Interval(intervals.get(0).start,intervals.get(0).end));
+        int i = 0;
+        int j = i+1;
+        while (i < list.size() && j<intervals.size()) {
+            for (; j < intervals.size(); j++) {
+                int sval = list.get(i).start;
+                int eval = list.get(i).end;
+                int insval = intervals.get(j).start;
+                int ineval = intervals.get(j).end;
+                if(eval>=insval){
+                    list.remove(list.size()-1);
+                    list.add(new Interval(sval<=insval?sval:insval,eval<=ineval?ineval:eval));
+                }else{
+                    list.add(new Interval(insval,ineval));
+                    i++;
+                    j++;
+                    break;
+                }
+            }
+        }
         return list;
     }
     class IntervalsComp implements Comparator<Interval>{
@@ -48,9 +76,9 @@ public class MergeIntervals {
     @Test
     public void test() {
         List<Interval> list = new ArrayList<>();
+        list.add(new Interval(8,10));
         list.add(new Interval(1,3));
         list.add(new Interval(2,6));
-        list.add(new Interval(8,10));
         list.add(new Interval(15,18));
         merge(list);
     }
