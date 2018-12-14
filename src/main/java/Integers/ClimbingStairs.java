@@ -37,6 +37,47 @@ public class ClimbingStairs {
     }
 
     /**
+     * Runtime: 1 ms, faster than 100.00% of Java online submissions for Climbing Stairs.
+     * 不使用 array
+     * @param n
+     * @return
+     */
+    public int climbStairs4(int n) {
+
+        if(n<3) return n;
+        int n1=1;
+        int n2=2;
+        int result=0;
+        for (int i = 3; i <= n; i++) {
+            result=n2+n1;
+            n1=n2;
+            n2=result;
+        }
+        return result;
+
+    }
+    /**
+     * Runtime: 2 ms, faster than 91.75% of Java online submissions for Climbing Stairs.
+     * 简洁 使用array
+     * @param n
+     * @return
+     */
+    public int climbStairs3(int n) {
+        int[] ceng = new int[n+2];
+        ceng[0] = 0;
+        ceng[1] = 1;
+        ceng[2] = 2;
+        if(n == 0||n == 1||n == 2){
+            return ceng[n];
+        }
+        int i = 3;
+        for (; i <= n; i++) {
+            ceng[i] = ceng[i-1]+ceng[i-2];
+        }
+        return ceng[n];
+    }
+
+    /**
      * 反向找
      * Runtime: 2 ms, faster than 91.75% of Java online submissions for Climbing Stairs.
      * @param n
@@ -91,6 +132,7 @@ public class ClimbingStairs {
     public void test() {
 //        System.out.println(climbStairs2(4));
         System.out.println(climbStairs(4));
+        System.out.println(climbStairs3(4));
     }
 }
 
