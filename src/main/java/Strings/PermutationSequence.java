@@ -43,14 +43,13 @@ public class PermutationSequence {
 
     /**
      * Runtime: 9 ms, faster than 69.85% of Java online submissions for Permutation Sequence.
-     * TODO 待优化
      * @param n
      * @param k
      * @return
      */
     public String getPermutation(int n, int k) {
         List<Integer> list = new ArrayList<>();
-        int[] pal = new int[10];
+        int[] pal = new int[n+1];
         pal[0] = 1;
         for (int i = 1; i <= n; i++) {
             pal[i] = pal[i-1]*(i);
@@ -58,11 +57,31 @@ public class PermutationSequence {
         }
         int curn = n;
         int curk = (k-1);
+        StringBuilder rs = new StringBuilder();
+        while(rs.length()<n){
+            int j = curk / pal[curn-1];
+            rs.append(list.get(j));
+            list.remove(j);
+            curn -=1;
+            curk = curk%pal[curn];
+        }
+        return rs.toString();
+    }
+
+    public String getPermutation3(int n, int k) {
+        StringBuilder s = new StringBuilder("123456789");
+        int[] pal = new int[n+1];
+        pal[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            pal[i] = pal[i-1]*(i);
+        }
+        int curn = n;
+        int curk = (k-1);
         String rs = "";
         while(rs.length()<n){
             int j = curk / pal[curn-1];
-            rs += list.get(j);
-            list.remove(j);
+            rs += s.charAt(j);
+            s.deleteCharAt(j);
             curn -=1;
             curk = curk%pal[curn];
         }
