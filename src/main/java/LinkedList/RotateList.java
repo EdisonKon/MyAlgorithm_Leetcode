@@ -3,6 +3,8 @@ package LinkedList;
 import Entitys.ListNode;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * @description: 描述 Medium
  * @author: dekai.kong
@@ -33,26 +35,72 @@ public class RotateList {
 
     }
 
+    /**
+     * Runtime: 10 ms, faster than 51.40% of Java online submissions for Rotate List.
+     * @param head
+     * @param k
+     * @return
+     */
     public ListNode rotateRight(ListNode head, int k) {
+        if(head==null){
+            return head;
+        }
         ListNode count = head;
         ListNode acc = head;
         int len = 0;
-        for (int i = 0; i < k; i++) {
-            if(count == null){//判断是否是最后一个
+        for (int i = 1; i <= k; i++) {
+            if(count.next == null){//判断是否是最后一个
                 len = i;
                 break;
             }
             count = count.next;//移除个数
         }
+        if(len == k){
+            return head;
+        }else{
+            if(len>0){
+                int skip = len-k%len;
+                ListNode temp = new ListNode(0);
+                temp.next = acc;
+                for (int i = 0; i < skip; i++) {
+                    head = head.next;
+                    temp = temp.next;
+                }
+                if(head==null){
+                    return acc;
+                }
+                ListNode lnx = head;
+                while(head.next!=null){
+                    head=head.next;
+                }
+                temp.next = null;
+                head.next = acc;
+                return lnx;
+            }else{
+                ListNode temp;
+                int clen = 0;
+                while(count!=null){
+                    count = count.next;
+                    acc = acc.next;
+                    clen++;
+                }
+                if(acc==null){
+                    return head;
+                }
+                temp = acc;
+                ListNode lnx = head;
+                for (int i = 1; i < clen; i++) {
+                    lnx = lnx.next;
+                }
+                lnx.next = null;
+                while(acc.next!=null){
+                    acc=acc.next;
+                }
+                acc.next = head;
 
-        for (int i = 0; i < k%(len==0?1:len); i++) {
-            acc=acc.next;
+                return temp;
+            }
         }
-        ListNode temp = acc.next;
-        ListNode nh = reverse(acc.next);
-        temp.next = acc;
-        acc.next = null;
-        return nh;
     }
     public ListNode reverse(ListNode head){
         ListNode prev = null;
@@ -68,8 +116,8 @@ public class RotateList {
 
     @Test
     public void test() {
-//        int[] a = {1,2,3,4,5};
-        int[] a = {1,2,3};int tar = 1;
+//        int[] a = {1,2,3,4,5};int tar = 7;
+        int[] a = {1};int tar = 99;
         ListNode l1 = new ListNode(a[0]);
         ListNode tem = l1;
         for(int i=1;i<a.length;i++){
@@ -77,7 +125,7 @@ public class RotateList {
             tem.next = lx;
             tem = tem.next;
         }
-        rotateRight(l1,4);
+        rotateRight(l1,tar);
     }
 }
 
