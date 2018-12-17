@@ -18,6 +18,7 @@ import org.junit.Test;
  *
  * Input: 1->1->2->3->3
  * Output: 1->2->3
+ * TODO listNode的题可多刷
  */
 
 public class RemoveDuplicatesfromSortedList {
