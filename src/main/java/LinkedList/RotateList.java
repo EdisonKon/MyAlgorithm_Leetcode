@@ -3,6 +3,7 @@ package LinkedList;
 import Entitys.ListNode;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,7 +42,7 @@ public class RotateList {
      * @param k
      * @return
      */
-    public ListNode rotateRight(ListNode head, int k) {
+    public ListNode rotateRight2(ListNode head, int k) {
         if(head==null){
             return head;
         }
@@ -113,7 +114,28 @@ public class RotateList {
         }
         return prev;
     }
-
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head==null){
+            return head;
+        }
+        ListNode count = head;
+        ListNode acc = head;
+        List<ListNode> list = new ArrayList<>();
+        int len = 0;
+        for (int i = 1; i <= k; i++) {
+            if(count.next == null){//判断是否是最后一个
+                len = i;
+                break;
+            }
+            count = count.next;//移除个数
+        }
+        if(len>0){//k大于整个长度
+            for (int i = 0; i < len - k%len; i++) {
+                list.add(acc);
+                acc = acc.next;
+            }
+        }
+    }
     @Test
     public void test() {
 //        int[] a = {1,2,3,4,5};int tar = 7;
