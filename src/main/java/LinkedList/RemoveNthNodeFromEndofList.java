@@ -81,8 +81,8 @@ public class RemoveNthNodeFromEndofList {
 
     @Test
     public void test(){
-//        int[] a = {1,2,3,4,5};int tar = 2;
-        int[] a = {1};int tar = 1;
+        int[] a = {1,2,3,4,5};int tar = 2;
+//        int[] a = {1};int tar = 1;
         ListNode l1 = new ListNode(a[0]);
         ListNode tem = l1;
         for(int i=1;i<a.length;i++){
@@ -91,6 +91,6 @@ public class RemoveNthNodeFromEndofList {
             tem = tem.next;
         }
 
-        removeNthFromEnd(l1,tar);
+        removeNthFromEnd2(l1,tar);
     }
 }
