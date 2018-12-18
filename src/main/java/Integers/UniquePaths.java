@@ -38,14 +38,32 @@ public class UniquePaths {
 
     }
 
+    /**
+     * Runtime: 0 ms, faster than 100.00% of Java online submissions for Unique Paths.
+     * @param m
+     * @param n
+     * @return
+     */
     public int uniquePaths(int m, int n) {
-
-        return 0;
+        if(m == 0 || n==0){
+            return 0;
+        }
+        int min = m>n?n:m;
+        int max = m>n?m:n;
+        int[] res = new int[min];
+        res[0] = 1;
+        for (int i = 0; i < max; i++) {
+            for (int j = 1; j < min; j++) {
+                res[j] += res[j-1];
+            }
+        }
+        return res[min-1];
     }
 
     @Test
     public void test() {
-        uniquePaths(3,2);
+        System.out.println(uniquePaths(3,2));
+        System.out.println(uniquePaths(7,3));
     }
 }
 
