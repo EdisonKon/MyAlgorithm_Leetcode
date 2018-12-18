@@ -114,8 +114,15 @@ public class RotateList {
         }
         return prev;
     }
+
+    /**
+     * Runtime: 8 ms, faster than 71.53% of Java online submissions for Rotate List.
+     * @param head
+     * @param k
+     * @return
+     */
     public ListNode rotateRight(ListNode head, int k) {
-        if(head==null){
+        if(head==null||k==0){
             return head;
         }
         ListNode count = head;
@@ -129,17 +136,78 @@ public class RotateList {
             }
             count = count.next;//移除个数
         }
+        if(len == 1||(len!=0 &&0 == k%len)){
+            return head;
+        }
         if(len>0){//k大于整个长度
-            for (int i = 0; i < len - k%len; i++) {
+            int tlen = (len - k%len);
+            for (int i = 0; i < tlen; i++) {
                 list.add(acc);
                 acc = acc.next;
             }
+            list.get(tlen-1).next=null;
+            while(acc!=null){
+                list.add(acc);
+                acc = acc.next;
+            }
+            list.get(list.size()-1).next = list.get(0);
+            return list.get(tlen);
+        }else{
+            while(count!=null){
+                count = count.next;
+                list.add(acc);
+                acc = acc.next;
+                len ++;
+            }
+            while(acc!=null){
+                list.add(acc);
+                acc = acc.next;
+            }
+            list.get(len-1).next=null;
+            list.get(list.size()-1).next = list.get(0);
+            return list.get(len);
         }
+    }
+
+    /**
+     * leetcode 6ms 100%
+     * @param head
+     * @param k
+     * @return
+     */
+    public ListNode rotateRight3(ListNode head, int k) {
+        if (head == null) {
+            return null;
+        }
+        ListNode start = head;
+        ListNode end = start;
+
+        int lCount = 0;
+        while(start != null) {
+            lCount++;
+            end = start;
+            start = start.next;
+        }
+
+        // track head and reset start;
+        start = head;
+        int point = lCount - (k % lCount);
+
+        lCount = 0;
+        while(lCount < point - 1) {
+            lCount++;
+            start = start.next;
+        }
+
+        end.next = head;
+        head = start.next;
+        start.next = null;
+        return head;
     }
     @Test
     public void test() {
-//        int[] a = {1,2,3,4,5};int tar = 7;
-        int[] a = {1};int tar = 99;
+//        int[] a = {1,2,3,4,5};int tar = 2;
+        int[] a = {1,2};int tar = 2;
         ListNode l1 = new ListNode(a[0]);
         ListNode tem = l1;
         for(int i=1;i<a.length;i++){
@@ -147,7 +215,7 @@ public class RotateList {
             tem.next = lx;
             tem = tem.next;
         }
-        rotateRight(l1,tar);
+        rotateRight3(l1,tar);
     }
 }
 
