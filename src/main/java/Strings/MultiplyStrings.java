@@ -131,12 +131,12 @@ public class MultiplyStrings {
         int m1 = c1.length, m2 = c2.length;
         int [] res = new int[m1 + m2];
         for (int i = m1-1; i >= 0; i--) {
-                for (int j = m2-1; j >= 0; j--) {
-                    int a = c1[i] - '0';
-                    int b = c2[j] - '0';
-                    int sum = a * b;
-                    res[i + j + 1] += sum;
-                }
+            for (int j = m2-1; j >= 0; j--) {
+                int a = c1[i] - '0';
+                int b = c2[j] - '0';
+                int sum = a * b;
+                res[i + j + 1] += sum;
+            }
         }
         for(int i = m1 + m2 - 1; i >= 0; i --){
             res[i] += isUp;
