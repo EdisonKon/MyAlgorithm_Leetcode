@@ -12,7 +12,6 @@ import org.junit.Test;
  *
  * You have the following 3 operations permitted on a word:
  *
- *
  * Insert a character
  * Delete a character
  * Replace a character
