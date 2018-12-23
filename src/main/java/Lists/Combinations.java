@@ -42,15 +42,10 @@ public class Combinations {
      */
     public List<List<Integer>> combine2(int n, int k) {
         List<List<Integer>> rst = new ArrayList<>();
-        if(n == k){
-            List<Integer> inlist = new ArrayList<>();
-            for (int i = 0; i < n; i++) {
-                inlist.add(i+1);
-            }
-            rst.add(inlist);
-        }else if(n > k){
-            rst = helper(rst,n,k,1,new ArrayList<>());
+        if (n < 1 || k < 1 || k > n) {
+            return rst;
         }
+        rst = helper(rst,n,k,1,new ArrayList<>());
         return rst;
     }
     public List<List<Integer>> helper(List<List<Integer>> rst,int n,int k,int start,List<Integer> inlist){
@@ -64,6 +59,34 @@ public class Combinations {
             }
         }
         return rst;
+    }
+
+    /**
+     * leetcode 1ms
+     * Runtime: 1 ms, faster than 10.00% of Java online submissions for Combinations.
+     * @param n
+     * @param k
+     * @return
+     */
+    public List<List<Integer>> combine3(int n, int k) {
+        List<List<Integer>> ans = new ArrayList<>();
+        if (n < 1 || k < 1 || k > n) {
+            return ans;
+        }
+        makeCom(n, k, ans, new ArrayList<Integer>(), 0);
+        return ans;
+    }
+    public void makeCom(int n, int k, List<List<Integer>> ans, List<Integer> level, int pos) {
+        if (k == 0) {
+            ans.add(new ArrayList<>(level));
+            return;
+        }
+        for (int i = pos; i <= n - k; i++) {
+            level.add(i + 1);
+            makeCom(n, k - 1, ans, level, i + 1);
+            level.remove(level.size() - 1);
+        }
+        return;
     }
 
     /**
@@ -117,6 +140,6 @@ public class Combinations {
 //        combine(5,2);
 //        combine(4,3);
 //        combine(5,3);
-        combine(5,4);
+        combine3(4,3);
     }
 }
