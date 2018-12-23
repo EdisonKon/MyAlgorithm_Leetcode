@@ -67,7 +67,7 @@ public class Combinations {
     }
 
     /**
-     * TODO
+     * TODO 未完成
      * 待优化
      * @param n
      * @param k
@@ -78,10 +78,32 @@ public class Combinations {
         int max = n+1-k;
         for (int i = 1; i <= max; i++) {
             List<Integer> inlist = new ArrayList<>();
-            for (int j = i+1; j < n + 1; i++) {
+            inlist.add(i);
+            if(k == 1){
+                rst.add(new ArrayList<>(inlist));
+                continue;
+            }
+            int tims = 0;
+            for (int j = i+1; j <= n + 1; j++) {
+                if(j == n+1 && n>k){
+                    if(inlist.size()>1){
+                        tims++;
+                        inlist = new ArrayList<>();
+                        inlist.add(i);
+                        j = i+tims;
+                        if(j<=k){
+                            continue;
+                        }else{
+                            break;
+                        }
+                    }
+                }
+                if(j == n+1) break;
                 inlist.add(j);
                 while(inlist.size() == k){
                     rst.add(new ArrayList<>(inlist));
+                    inlist.remove(inlist.size()-1);
+                    break;
                 }
             }
         }
@@ -91,6 +113,10 @@ public class Combinations {
 
     @Test
     public void test(){
-        combine(4,2);
+//        combine(4,2);
+//        combine(5,2);
+//        combine(4,3);
+//        combine(5,3);
+        combine(5,4);
     }
 }
