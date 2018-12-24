@@ -9,7 +9,8 @@ import org.junit.Test;
  * @from https://leetcode.com/problems/word-search/
  * Given a 2D board and a word, find if the word exists in the grid.
  *
- * The word can be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once.
+ * The word can be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those horizontally or vertically neighboring.
+ * The same letter cell may not be used more than once.
  *
  * Example:
  *
@@ -31,7 +32,12 @@ public class WordSearch {
     }
 
     public boolean exist(char[][] board, String word) {
-        int[]
+        if(board==null||board.length==0||board[0].length==0){
+            return false;
+        }
+        //用于记录是否用过
+        int[][] copy = new int[board.length][board[0].length];
+        return false;
     }
 
     @Test
