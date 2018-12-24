@@ -32,7 +32,7 @@ public class WordSearch {
     }
 
     /**
-     * Runtime: 21 ms, faster than 20.53% of Java online submissions for Word Search.
+     * Runtime: 15 ms, faster than 32.69% of Java online submissions for Word Search.
      * @param board
      * @param word
      * @return
