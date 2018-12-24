@@ -1,9 +1,8 @@
-package Arrays;
+package MyArrays;
 
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * @author dekai.kong
