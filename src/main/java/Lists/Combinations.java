@@ -63,12 +63,12 @@ public class Combinations {
 
     /**
      * leetcode 1ms
-     * Runtime: 1 ms, faster than 10.00% of Java online submissions for Combinations.
+     * Runtime: 1 ms, faster than 100.00% of Java online submissions for Combinations.
      * @param n
      * @param k
      * @return
      */
-    public List<List<Integer>> combine3(int n, int k) {
+    public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> ans = new ArrayList<>();
         if (n < 1 || k < 1 || k > n) {
             return ans;
@@ -89,50 +89,6 @@ public class Combinations {
         return;
     }
 
-    /**
-     * TODO 未完成
-     * 待优化
-     * @param n
-     * @param k
-     * @return
-     */
-    public List<List<Integer>> combine(int n, int k) {
-        List<List<Integer>> rst = new ArrayList<>();
-        int max = n+1-k;
-        for (int i = 1; i <= max; i++) {
-            List<Integer> inlist = new ArrayList<>();
-            inlist.add(i);
-            if(k == 1){
-                rst.add(new ArrayList<>(inlist));
-                continue;
-            }
-            int tims = 0;
-            for (int j = i+1; j <= n + 1; j++) {
-                if(j == n+1 && n>k){
-                    if(inlist.size()>1){
-                        tims++;
-                        inlist = new ArrayList<>();
-                        inlist.add(i);
-                        j = i+tims;
-                        if(j<=k){
-                            continue;
-                        }else{
-                            break;
-                        }
-                    }
-                }
-                if(j == n+1) break;
-                inlist.add(j);
-                while(inlist.size() == k){
-                    rst.add(new ArrayList<>(inlist));
-                    inlist.remove(inlist.size()-1);
-                    break;
-                }
-            }
-        }
-
-        return rst;
-    }
 
     @Test
     public void test(){
@@ -140,6 +96,6 @@ public class Combinations {
 //        combine(5,2);
 //        combine(4,3);
 //        combine(5,3);
-        combine3(4,3);
+        combine(4,3);
     }
 }
