@@ -24,6 +24,8 @@ import org.junit.Test;
  * Given word = "ABCCED", return true.
  * Given word = "SEE", return true.
  * Given word = "ABCB", return false.
+ *
+ * TODO 经典DFS题，可多刷
  */
 
 public class WordSearch {
@@ -36,6 +38,7 @@ public class WordSearch {
      * @param board
      * @param word
      * @return
+     * 有一个数组记录是否访问过，还有一种方法是直接在原数组上该，用个temp记录原值，如果false了把值赋值回去；
      */
     public boolean exist(char[][] board, String word) {
         if(board==null||board.length==0||board[0].length==0){
