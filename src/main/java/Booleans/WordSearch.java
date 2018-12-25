@@ -93,6 +93,8 @@ public class WordSearch {
 
     /**
      * Runtime: 11 ms, faster than 56.73% of Java online submissions for Word Search.
+     * 去掉char[] words = word.toCharArrays();
+     * Runtime: 9 ms, faster than 72.31% of Java online submissions for Word Search.
      * @param board
      * @param word
      * @return
@@ -105,12 +107,11 @@ public class WordSearch {
         //用于记录是否用过
         int olen = board.length;
         int ilen = board[0].length;
-        char[] words = word.toCharArray();
         int ix = 0;
         for (int i = 0; i < olen; i++) {
             for (int j = 0; j < ilen; j++) {
-                if(board[i][j] == words[ix]){
-                    if(helper(i,j,olen,ilen,words,ix,board)){
+                if(board[i][j] == word.charAt(ix)){
+                    if(helper(i,j,olen,ilen,word,ix,board)){
                         return true;
                     }
                     ix = 0;
@@ -121,21 +122,21 @@ public class WordSearch {
         return false;
     }
 
-    public boolean helper(int i,int j,int olen,int ilen,char[] words,int index,char[][] board){
-        if(index == words.length){
+    public boolean helper(int i,int j,int olen,int ilen,String word,int index,char[][] board){
+        if(index == word.length()){
             return true;
         }
         if(i<0 || i>olen-1 || j<0 || j > ilen-1){
             return false;
         }
-        if(words[index] == board[i][j] && board[i][j] != '#'){
+        if(word.charAt(index) == board[i][j] && board[i][j] != '#'){
             char temp = board[i][j];
             board[i][j] = '#';
             if(i>=0 || i<=olen-1 || j>=0 || j<= ilen-1){
-                boolean bo = helper(i-1,j,olen,ilen,words,index+1,board)||
-                        helper(i,j-1,olen,ilen,words,index+1,board)||
-                        helper(i+1,j,olen,ilen,words,index+1,board)||
-                        helper(i,j+1,olen,ilen,words,index+1,board);
+                boolean bo = helper(i-1,j,olen,ilen,word,index+1,board)||
+                        helper(i,j-1,olen,ilen,word,index+1,board)||
+                        helper(i+1,j,olen,ilen,word,index+1,board)||
+                        helper(i,j+1,olen,ilen,word,index+1,board);
                 if(!bo){
                     board[i][j] = temp;
                 }
