@@ -93,8 +93,10 @@ public class WordSearch {
 
     /**
      * Runtime: 11 ms, faster than 56.73% of Java online submissions for Word Search.
-     * 去掉char[] words = word.toCharArrays();
+     * 去掉char[] words = word.toCharArray();
      * Runtime: 9 ms, faster than 72.31% of Java online submissions for Word Search.
+     * 优化if判断后
+     * Runtime: 8 ms, faster than 85.83% of Java online submissions for Word Search.
      * @param board
      * @param word
      * @return
@@ -126,38 +128,34 @@ public class WordSearch {
         if(index == word.length()){
             return true;
         }
-        if(i<0 || i>olen-1 || j<0 || j > ilen-1){
+        if(i<0 || i>olen-1 || j<0 || j > ilen-1||board[i][j] == '#'||word.charAt(index) != board[i][j]){
             return false;
         }
-        if(word.charAt(index) == board[i][j] && board[i][j] != '#'){
-            char temp = board[i][j];
-            board[i][j] = '#';
-            if(i>=0 || i<=olen-1 || j>=0 || j<= ilen-1){
-                boolean bo = helper(i-1,j,olen,ilen,word,index+1,board)||
-                        helper(i,j-1,olen,ilen,word,index+1,board)||
-                        helper(i+1,j,olen,ilen,word,index+1,board)||
-                        helper(i,j+1,olen,ilen,word,index+1,board);
-                if(!bo){
-                    board[i][j] = temp;
-                }
-                return bo;
-
+        char temp = board[i][j];
+        board[i][j] = '#';
+        if(i>=0 || i<=olen-1 || j>=0 || j<= ilen-1){
+            boolean bo = helper(i-1,j,olen,ilen,word,index+1,board)||
+                    helper(i,j-1,olen,ilen,word,index+1,board)||
+                    helper(i+1,j,olen,ilen,word,index+1,board)||
+                    helper(i,j+1,olen,ilen,word,index+1,board);
+            if(!bo){
+                board[i][j] = temp;
             }
-        }else{
-            return false;
+            return bo;
+
         }
         return false;
     }
 
     @Test
     public void test() {
-//        char[][] board = {{'A','B','C','E'},{'S','F','E','S'},{'A','D','E','E'}};
-        char[][] board = {{'A','A'}};
+        char[][] board = {{'A','B','C','E'},{'S','F','E','S'},{'A','D','E','E'}};
+//        char[][] board = {{'A','A'}};
         System.out.println(exist(board,"AAA"));
 //        System.out.println(exist(board,"ABCCED"));
 //        System.out.println(exist(board,"SEE"));
 //        System.out.println(exist(board,"ABCB"));
-//        System.out.println(exist(board,"ABCESEEEFS"));
+        System.out.println(exist(board,"ABCESEEEFS"));
 
     }
 }
