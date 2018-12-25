@@ -48,6 +48,56 @@ public class RemoveDuplicatesfromSortedArrayII {
 
     }
 
+    /**
+     * 未优化if条件
+     * Runtime: 8 ms, faster than 56.77% of Java online submissions for Remove Duplicates from Sorted Array II.
+     * @param nums
+     * @return
+     */
+    public int removeDuplicates2(int[] nums) {
+        int tem = 1;
+        int times = 0;
+        int idx = 0;
+        int temv;
+        //如果不到3个数那直接返回就ok
+        if(nums.length<3){
+            return nums.length;
+        }
+        for (int i = 1; i < nums.length; i++) {
+            if(nums[i] == nums[i-1]){
+                tem++;
+                if(tem == 3){
+                    idx = i;
+                }
+            }else if(idx>0 && nums[i] == nums[idx-1]){
+                tem++;
+                if(tem < 3){
+                    temv = nums[idx];
+                    nums[idx] = nums[i];
+                    nums[i]= temv;
+                    idx++;
+                }
+            }else{
+                if(idx>0){
+                    temv = nums[idx];
+                    nums[idx] = nums[i];
+                    nums[i]= temv;
+                    idx++;
+                }
+                while(tem>2){
+                    times++;
+                    tem--;
+                }
+                tem=1;
+            }
+        }
+        while(tem>2){
+            times++;
+            tem--;
+        }
+        return nums.length - times;
+    }
+
     public int removeDuplicates(int[] nums) {
         int tem = 1;
         int times = 0;
@@ -64,13 +114,12 @@ public class RemoveDuplicatesfromSortedArrayII {
                     idx = i;
                 }
             }else if(idx>0 && nums[i] == nums[idx-1]){
-                temv = nums[idx];
-                nums[idx] = nums[i];
-                nums[i]= temv;
-                idx++;
                 tem++;
-                if(tem == 3){
-                    idx -= 1;
+                if(tem < 3){
+                    temv = nums[idx];
+                    nums[idx] = nums[i];
+                    nums[i]= temv;
+                    idx++;
                 }
             }else{
                 if(idx>0){
