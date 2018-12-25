@@ -98,6 +98,11 @@ public class RemoveDuplicatesfromSortedArrayII {
         return nums.length - times;
     }
 
+    /**
+     * Runtime: 6 ms, faster than 94.13% of Java online submissions for Remove Duplicates from Sorted Array II.
+     * @param nums
+     * @return
+     */
     public int removeDuplicates(int[] nums) {
         int tem = 1;
         int times = 0;
@@ -113,41 +118,43 @@ public class RemoveDuplicatesfromSortedArrayII {
                 if(tem == 3){
                     idx = i;
                 }
-            }else if(idx>0 && nums[i] == nums[idx-1]){
-                tem++;
-                if(tem < 3){
-                    temv = nums[idx];
-                    nums[idx] = nums[i];
-                    nums[i]= temv;
-                    idx++;
-                }
             }else{
+                if(tem>2) {
+                    times += tem - 2;
+                    tem=0;
+                }
+                if(tem == 2 && idx==0){
+                    tem=1;
+                }
                 if(idx>0){
-                    temv = nums[idx];
-                    nums[idx] = nums[i];
-                    nums[i]= temv;
-                    idx++;
+                    if(nums[i] != nums[idx-1]){
+                        tem = 1;
+                    }else if(tem < 3){
+                        tem++;
+                    }
+                    if(tem<3){
+                        temv = nums[idx];
+                        nums[idx] = nums[i];
+                        nums[i]= temv;
+                        idx++;
+                    }
                 }
-                while(tem>2){
-                    times++;
-                    tem--;
-                }
-                tem=1;
+
             }
         }
-        while(tem>2){
-            times++;
-            tem--;
-        }
+        if(tem>2)
+            times += tem - 2;
         return nums.length - times;
     }
 
     @Test
     public void test() {
+//        System.out.println(removeDuplicates(new int[]{0,0,1,1,1,1,2,3,3}));
 //        System.out.println(removeDuplicates(new int[]{1,1,1,2,2,3}));
 //        System.out.println(removeDuplicates(new int[]{0,0,1,1,1,1,2,3,3}));
 //        System.out.println(removeDuplicates(new int[]{1,1,1}));
-        System.out.println(removeDuplicates(new int[]{0,1,1,1,2,3,3,3,3,4,4}));
+//        System.out.println(removeDuplicates(new int[]{0,1,1,1,2,3,3,3,3,4,4}));
+        System.out.println(removeDuplicates(new int[]{0,1,2,2,2,2,2,3,4,4,4}));
     }
 }
 
