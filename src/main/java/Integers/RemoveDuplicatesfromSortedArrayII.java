@@ -103,7 +103,7 @@ public class RemoveDuplicatesfromSortedArrayII {
      * @param nums
      * @return
      */
-    public int removeDuplicates(int[] nums) {
+    public int removeDuplicates3(int[] nums) {
         int tem = 1;
         int times = 0;
         int idx = 0;
@@ -145,6 +145,24 @@ public class RemoveDuplicatesfromSortedArrayII {
         if(tem>2)
             times += tem - 2;
         return nums.length - times;
+    }
+
+    /**
+     * leetcode
+     * @param nums
+     * @return
+     */
+    public int removeDuplicates(int[] nums) {
+        if (nums.length <= 2) return nums.length;
+
+        int index = 2;
+        for (int i = 2; i < nums.length; i++) {
+            if (nums[i] != nums[index - 2]) {
+                nums[index++] = nums[i];
+            }
+        }
+
+        return index;
     }
 
     @Test
