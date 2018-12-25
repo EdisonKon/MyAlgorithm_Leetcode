@@ -86,13 +86,19 @@ public class RemoveDuplicatesfromSortedArrayII {
                 tem=1;
             }
         }
+        while(tem>2){
+            times++;
+            tem--;
+        }
         return nums.length - times;
     }
 
     @Test
     public void test() {
-        System.out.println(removeDuplicates(new int[]{1,1,1,2,2,3}));
-        System.out.println(removeDuplicates(new int[]{0,0,1,1,1,1,2,3,3}));
+//        System.out.println(removeDuplicates(new int[]{1,1,1,2,2,3}));
+//        System.out.println(removeDuplicates(new int[]{0,0,1,1,1,1,2,3,3}));
+//        System.out.println(removeDuplicates(new int[]{1,1,1}));
+        System.out.println(removeDuplicates(new int[]{0,1,1,1,2,3,3,3,3,4,4}));
     }
 }
 
