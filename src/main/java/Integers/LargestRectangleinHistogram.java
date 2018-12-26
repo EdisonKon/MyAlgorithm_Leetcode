@@ -24,31 +24,56 @@ public class LargestRectangleinHistogram {
 
     }
 
-    public int largestRectangleArea(int[] heights) {
+    /**
+     * 未完成
+     * @param heights
+     * @return
+     */
+    public int largestRectangleArea2(int[] heights) {
         int res = 0;
         int minval = Integer.MAX_VALUE;
+        int maxval = Integer.MIN_VALUE;
+        int maxinx = 0;
         int curinx = 0;
         int least = 0;
         int len = heights.length;
-        if(len > 1){
-            for (int i = curinx; i < len-1; i++) {
-                int curval = heights[i];
-                int nexval = heights[i+1];
-                if( curval>nexval && nexval != 0){//大于后边的值,且后边值不为0
-                    minval = Math.min(nexval,minval);//当前最小的值
-                    i+1 - curinx
-                    least = Math.min(least,curval);
-                    res = Math.max(res,least);
+        for (int i = curinx; i < len; i++) {
+            int val = heights[i];
+            if(val != 0){
+                minval = Math.min(val,minval);//当前最小值
+                if(val>=maxval){//当前最大值
+                    maxinx = i;
+                    maxval = val;
                 }
+                least = Math.max(maxval,(i-curinx+1)*minval);//至少有多大
+            }else{
+                curinx = i+1;
+                int left = maxinx;
+                int righ = maxinx;
+                while(left>=0 || righ<=i-1){
+
+                    left--;
+                    righ++;
+                }
+            }
+        }
+        return res;
+    }
+    public int largestRectangleArea(int[] heights) {
+        int res = 0;
+        int[] val = new int[heights.length];
+        int len = heights.length;
+        if(len>1){
+            for (int i = 0; i < len-1; i++) {
+
             }
         }
         res = len==1?heights[0]:res;
         return res;
     }
-
     @Test
     public void test() {
-        largestRectangleArea(new int[]{2,1,5,6,2,3});
+        largestRectangleArea(new int[]{2,1,0,5,6,2,3});
     }
 }
 
