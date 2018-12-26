@@ -64,8 +64,10 @@ public class LargestRectangleinHistogram {
         int[] val = new int[heights.length];
         int len = heights.length;
         if(len>1){
-            for (int i = 0; i < len-1; i++) {
+            for (int i = 0; i < len - 1; i++) {
+                for (int j = 0; j < len - 1; j++) {
 
+                }
             }
         }
         res = len==1?heights[0]:res;
