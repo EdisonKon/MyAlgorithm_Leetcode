@@ -29,7 +29,7 @@ public class LargestRectangleinHistogram {
      * @param heights
      * @return
      */
-    public int largestRectangleArea2(int[] heights) {
+    public int largestRectangleArea(int[] heights) {
         int res = 0;
         int minval = Integer.MAX_VALUE;
         int maxval = Integer.MIN_VALUE;
@@ -37,36 +37,33 @@ public class LargestRectangleinHistogram {
         int curinx = 0;
         int least = 0;
         int len = heights.length;
-        for (int i = curinx; i < len; i++) {
-            int val = heights[i];
-            if(val != 0){
-                minval = Math.min(val,minval);//当前最小值
-                if(val>=maxval){//当前最大值
-                    maxinx = i;
-                    maxval = val;
-                }
-                least = Math.max(maxval,(i-curinx+1)*minval);//至少有多大
-            }else{
-                curinx = i+1;
-                int left = maxinx;
-                int righ = maxinx;
-                while(left>=0 || righ<=i-1){
 
-                    left--;
-                    righ++;
-                }
-            }
-        }
         return res;
     }
-    public int largestRectangleArea(int[] heights) {
+
+    /**
+     * 689ms Your runtime beats 5.48 % of java submissions.
+     * @param heights
+     * @return
+     */
+    public int largestRectangleArea2(int[] heights) {
         int res = 0;
-        int[] val = new int[heights.length];
         int len = heights.length;
         if(len>1){
-            for (int i = 0; i < len - 1; i++) {
-                for (int j = 0; j < len - 1; j++) {
-
+            for (int i = 0; i <= len - 1; i++) {
+                int val = heights[i];
+                if(val!=0){
+                    res = Math.max(res,val);
+                    int min = val;
+                    for (int j = i+1; j <= len - 1; j++) {
+                        int jval = heights[j];
+                        if(jval == 0){
+                            break;
+                        }
+                        min = Math.min(min,jval);
+                        val = (j+1-i)*min;
+                        res = Math.max(res,val);
+                    }
                 }
             }
         }
@@ -75,7 +72,8 @@ public class LargestRectangleinHistogram {
     }
     @Test
     public void test() {
-        largestRectangleArea(new int[]{2,1,0,5,6,2,3});
+        System.out.println(largestRectangleArea(new int[]{2,1,5,6,2,3}));
+//        largestRectangleArea(new int[]{1,1});
     }
 }
 
