@@ -50,7 +50,7 @@ public class RemoveDuplicatesfromSortedArrayII {
 
     /**
      * 未优化if条件
-     * Runtime: 8 ms, faster than 56.77% of Java online submissions for Remove Duplicates from Sorted Array II.
+     * Runtime: 7 ms, faster than 66.21% of Java online submissions for Remove Duplicates from Sorted Array II.
      * @param nums
      * @return
      */
@@ -84,16 +84,14 @@ public class RemoveDuplicatesfromSortedArrayII {
                     nums[i]= temv;
                     idx++;
                 }
-                while(tem>2){
-                    times++;
-                    tem--;
+                if(tem>2){
+                    times+=tem-2;
                 }
                 tem=1;
             }
         }
-        while(tem>2){
-            times++;
-            tem--;
+        if(tem>2){
+            times+=tem-2;
         }
         return nums.length - times;
     }
