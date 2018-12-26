@@ -26,6 +26,23 @@ public class LargestRectangleinHistogram {
 
     public int largestRectangleArea(int[] heights) {
         int res = 0;
+        int minval = Integer.MAX_VALUE;
+        int curinx = 0;
+        int least = 0;
+        int len = heights.length;
+        if(len > 1){
+            for (int i = curinx; i < len-1; i++) {
+                int curval = heights[i];
+                int nexval = heights[i+1];
+                if( curval>nexval && nexval != 0){//大于后边的值,且后边值不为0
+                    minval = Math.min(nexval,minval);//当前最小的值
+                    i+1 - curinx
+                    least = Math.min(least,curval);
+                    res = Math.max(res,least);
+                }
+            }
+        }
+        res = len==1?heights[0]:res;
         return res;
     }
 
