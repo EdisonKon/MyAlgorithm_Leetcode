@@ -19,6 +19,7 @@ import java.util.Stack;
  *
  * 获取最大直方图连续的面积
  * 例如本例 5 6 连起来是5*2最大
+ * TODO 可以多看看思路
  */
 
 public class LargestRectangleinHistogram {
