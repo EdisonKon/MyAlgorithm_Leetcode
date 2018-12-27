@@ -28,7 +28,11 @@ public class MaximalRectangle {
 
     public int maximalRectangle(char[][] matrix) {
         int res = 0;
-        if(matrix==null|matrix.length==0|matrix[0].length==0) return res;
+        if(matrix==null||matrix.length==0||matrix[0].length==0) return res;
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int[][] record = new int[m][n];//1是左右,2是上下,3是全都有
+
         return res;
     }
 
