@@ -2,6 +2,8 @@ package Integers;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * @description: 描述 Hard
  * @author: dekai.kong
@@ -66,7 +68,7 @@ public class MaximalRectangle {
     }
 
 
-    public int maximalRectangle(char[][] matrix) {
+    public int maximalRectangle3(char[][] matrix) {
         int res = 0;
         if(matrix==null||matrix.length==0||matrix[0].length==0) return res;
         int m = matrix.length;
@@ -104,7 +106,7 @@ public class MaximalRectangle {
                     if (j>0){
                         int val = record[j][1] + record[j-1][1];
                         if(val > record[j][1]){
-                            record[j][0] += record[j-1][1]
+                            record[j][0] += record[j-1][1];
                         }
                         record[j][1] += record[j-1][1];
                     }
@@ -122,6 +124,56 @@ public class MaximalRectangle {
 
     }
 
+
+    /**
+     * Runtime: 8 ms, faster than 87.97% of Java online submissions for Maximal Rectangle.
+     * @param matrix
+     * @return
+     * 借鉴DP from https://www.youtube.com/watch?v=5CEBM_174e0
+     * l[] 从左到右，出现连续'1'的char的第一个坐标
+     * r[] 从右到左，出现连续'1'的char的最后一个坐标
+     * h[] 从上到下的高度
+     */
+    public int maximalRectangle(char[][] matrix){
+        int res = 0;
+        if(matrix==null||matrix.length==0||matrix[0].length==0) return res;
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int[] h = new int[n];
+        int[] l = new int[n];
+        int[] r = new int[n];
+
+        Arrays.fill(r,n);
+        for (int i = 0; i < m; i++) {
+            int curL = 0, curR = n;
+            for (int j = 0; j < n; j++) {
+                if(matrix[i][j] == '1') h[j]++;
+                else h[j] = 0;
+            }
+            for (int j = 0; j < n; j++) {
+                if(matrix[i][j] == '1'){
+                    l[j] = Math.max(curL,l[j]);
+                }else{
+                    l[j] =0;
+                    curL = j+1;
+                }
+            }
+            for (int j = n-1; j >= 0; j--) {
+                if(matrix[i][j] == '1'){
+                    r[j] = Math.min(curR,r[j]);
+                }else{
+                    r[j] = n;
+                    curR = j;
+                }
+            }
+            for (int j = 0; j < n; j++) {
+                res = Math.max(res,(r[j]-l[j])*h[j]);
+            }
+        }
+
+
+        return res;
+    }
     @Test
     public void test() {
         maximalRectangle(new char[][]{
