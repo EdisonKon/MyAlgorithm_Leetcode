@@ -129,7 +129,7 @@ public class MaximalRectangle {
      * Runtime: 8 ms, faster than 87.97% of Java online submissions for Maximal Rectangle.
      * @param matrix
      * @return
-     * 借鉴DP from https://www.youtube.com/watch?v=5CEBM_174e0
+     * 借鉴(DP) from https://www.youtube.com/watch?v=5CEBM_174e0
      * l[] 从左到右，出现连续'1'的char的第一个坐标
      * r[] 从右到左，出现连续'1'的char的最后一个坐标
      * h[] 从上到下的高度
