@@ -62,7 +62,54 @@ public class ScrambleString {
 
     }
 
+    /**
+     * leetcode 1ms
+     */
+    int[] primes = new int[]{
+            2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31,
+            37, 41, 43, 47, 53, 59, 61, 67, 71, 73,
+            79, 83, 89, 97, 101
+    };
+
     public boolean isScramble(String s1, String s2) {
+        int l1 = s1.length(), l2 = s2.length();
+        if (l1 != l2) {
+            return false;
+        } else if (s1.equals(s2)) {
+            return true;
+        } else if (l1 == 1) {
+            return s1.equals(s2);
+        }
+        long a = 1, b = 1, c = 1;
+        for (int i = 0; i < l1 - 1; i++) {
+            a *= primes[s1.charAt(i) - 'a'];
+            b *= primes[s2.charAt(i) - 'a'];
+            c *= primes[s2.charAt(l2 - 1 - i) - 'a'];
+            if (
+                    a == b
+                            && isScramble(s1.substring(0, i + 1), s2.substring(0, i + 1))
+                            && isScramble(s1.substring(i + 1), s2.substring(i + 1))
+                    ) {
+                return true;
+            }
+            if (
+                    a == c
+                            && isScramble(s1.substring(0, i + 1), s2.substring(l2 - 1 - i))
+                            && isScramble(s1.substring(i + 1), s2.substring(0, l2 - 1 - i))
+                    ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Runtime: 5 ms, faster than 45.42% of Java online submissions for Scramble String.
+     * @param s1
+     * @param s2
+     * @return
+     */
+    public boolean isScramble2(String s1, String s2) {
         if(s1==null||s2==null||s1.length()!=s2.length()) return false;
         //跳出条件
         if(s1.length() ==1 && s1.equals(s2)) return true;
