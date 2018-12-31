@@ -33,7 +33,8 @@ public class DecodeWays {
     }
 
     public int numDecodings(String s) {
-
+        int rst = 0;
+        return rst;
     }
 
     @Test
