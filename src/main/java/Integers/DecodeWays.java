@@ -34,6 +34,9 @@ public class DecodeWays {
 
     public int numDecodings(String s) {
         int rst = 0;
+        char[] ss = s.toCharArray();
+        for (int i = 0; i < ss.length; i++) {
+        }
         return rst;
     }
 
