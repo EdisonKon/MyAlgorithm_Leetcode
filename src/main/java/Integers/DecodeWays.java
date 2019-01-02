@@ -36,6 +36,7 @@ public class DecodeWays {
         int rst = 0;
         char[] ss = s.toCharArray();
         for (int i = 0; i < ss.length; i++) {
+
         }
         return rst;
     }
