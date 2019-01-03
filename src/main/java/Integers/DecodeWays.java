@@ -36,10 +36,11 @@ public class DecodeWays {
 
     /**
      * Runtime: 4 ms, faster than 36.87% of Java online submissions for Decode Ways.
+     * O(n)
      * @param s
      * @return
      */
-    public int numDecodings(String s) {
+    public int numDecodings2(String s) {
         if(s == null || s.length() == 0) return 0;
         int len = s.length();
         int[] dp = new int[len+1];
@@ -56,6 +57,30 @@ public class DecodeWays {
             }
         }
         return dp[len];
+    }
+
+    /**
+     * Runtime: 2 ms, faster than 72.43% of Java online submissions for Decode Ways.
+     * o(1)
+     * @param s
+     * @return
+     */
+    public int numDecodings(String s) {
+        if(s == null || s.length() == 0 || s.charAt(0) == '0') return 0;
+        int c1 = 1;
+        int c2 = 1;
+        for (int i = 1; i < s.length(); i++) {
+            if(s.charAt(i) == '0'){
+                c1 = 0;
+            }
+            if(s.charAt(i -1) == '1'|| s.charAt(i -1) == '2' && s.charAt(i) <= '6'){
+                c1 = c1 + c2;
+                c2 = c1 - c2;
+            }else{
+                c2 = c1;
+            }
+        }
+        return c1;
     }
 
     @Test
