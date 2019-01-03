@@ -34,6 +34,11 @@ public class DecodeWays {
 
     }
 
+    /**
+     * Runtime: 4 ms, faster than 36.87% of Java online submissions for Decode Ways.
+     * @param s
+     * @return
+     */
     public int numDecodings(String s) {
         if(s == null || s.length() == 0) return 0;
         int len = s.length();
