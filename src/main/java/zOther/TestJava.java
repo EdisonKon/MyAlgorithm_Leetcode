@@ -60,7 +60,12 @@ public class TestJava {
         char[]   data={'a','b','c'};
         String  s=new   String(data);
         System.out.println(s);
-
+        List<String> lxs = new ArrayList<>();
+        lxs.add("1");
+        lxs.add("2");
+        lxs.add("3");
+        String[] xas = lxs.toArray(new String[lxs.size()]);
+        System.out.println(xas);
 
 
     }
