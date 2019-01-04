@@ -41,7 +41,7 @@ public class DecodeWays {
      * @return
      */
     public int numDecodings2(String s) {
-        if(s == null || s.length() == 0) return 0;
+        if(s == null || s.length() == 0) {return 0;}
         int len = s.length();
         int[] dp = new int[len+1];
         dp[0] = 1;
@@ -66,7 +66,7 @@ public class DecodeWays {
      * @return
      */
     public int numDecodings(String s) {
-        if(s == null || s.length() == 0 || s.charAt(0) == '0') return 0;
+        if(s == null || s.length() == 0 || s.charAt(0) == '0'){ return 0;}
         int c1 = 1;
         int c2 = 1;
         for (int i = 1; i < s.length(); i++) {
