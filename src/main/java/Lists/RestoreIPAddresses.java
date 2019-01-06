@@ -16,6 +16,8 @@ import java.util.List;
  *
  * Input: "25525511135"
  * Output: ["255.255.11.135", "255.255.111.35"]
+ * 一是只要遇到字符串的子序列或配准问题首先考虑动态规划DP，二是只要遇到需要求出所有可能情况首先考虑用递归。
+ * TODO
  */
 
 public class RestoreIPAddresses {
