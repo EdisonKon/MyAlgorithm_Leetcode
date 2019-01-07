@@ -31,6 +31,7 @@ public class RestoreIPAddresses {
         helper(s, 0, "", res);
         return res;
     }
+
     public void helper(String s, int n, String out, List<String> res) {
         if (n == 4) {
             if (s.isEmpty()) res.add(out);
