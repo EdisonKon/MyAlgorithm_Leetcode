@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * @description: 描述 Medium 94. Binary Tree Inorder Traversal
@@ -60,14 +61,26 @@ public class BinaryTreeInorderTraversal {
     }
 
     /**
-     *
-     * 非递归法
+     * Runtime: 1 ms, faster than 64.19% of Java online submissions for Binary Tree Inorder Traversal.
+     * 非递归法,用栈来做，思路是从根节点开始，先将根节点压入栈，然后再将其所有左子结点压入栈，然后取出栈顶节点，保存节点值，
+     * 再将当前指针移到其右子节点上，若存在右子节点，则在下次循环时又可将其所有左子结点压入栈中。这样就保证了访问顺序为左-根-右
      * @param root
      * @return
      */
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
-        helper(list,root);
+        Stack<TreeNode> s = new Stack<>();
+        TreeNode p = root;
+        while(p!=null || !s.empty()){
+            while(p!=null){
+                s.push(p);
+                p = p.left;
+            }
+            p = s.peek();
+            s.pop();
+            list.add(p.val);
+            p = p.right;
+        }
         return list;
     }
 
