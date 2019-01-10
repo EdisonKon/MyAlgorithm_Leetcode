@@ -87,7 +87,6 @@ public class UniqueBinarySearchTrees {
 
     @Test
     public void test() {
-
     }
 }
 
