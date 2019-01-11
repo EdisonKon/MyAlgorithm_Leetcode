@@ -3,6 +3,7 @@ package Lists;
 import Entitys.TreeNode;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,16 +41,57 @@ public class UniqueBinarySearchTreesII {
     }
 
     /**
-     * Runtime: 0 ms , faster than 100% of Java online submissions for Unique Binary Search Trees.
+     * Runtime: 3 ms, faster than 91.82% of Java online submissions for Unique Binary Search Trees II.
+     * 递归法 https://www.youtube.com/watch?v=GZ0qvkTAjmw
      * @param n
      * @return
      */
     public List<TreeNode> generateTrees(int n) {
+        List<TreeNode> ax = helper(1,n);
+        return ax;
+    }
 
+    public List<TreeNode> helper(int min,int max){
+        List<TreeNode> res = new ArrayList<>();
+        if(min>max) return res;
+        for (int i = min; i <=max ; i++) {
+            List<TreeNode> left = helper(min,i-1);
+            List<TreeNode> righ = helper(i+1,max);
+            if(left.size() == 0 && righ.size() == 0){
+                TreeNode root = new TreeNode(i);
+                res.add(root);
+            }
+            else if(left.size() == 0){
+                for (TreeNode r: righ) {
+                    TreeNode root = new TreeNode(i);
+                    root.right = r;
+                    res.add(root);
+                }
+            }
+            else if(righ.size() == 0){
+                for (TreeNode l: left) {
+                    TreeNode root = new TreeNode(i);
+                    root.left = l;
+                    res.add(root);
+                }
+            }
+            else{
+                for (TreeNode l: left) {
+                    for (TreeNode r: righ) {
+                        TreeNode root = new TreeNode(i);
+                        root.left = l;
+                        root.right = r;
+                        res.add(root);
+                    }
+                }
+            }
+        }
+        return res;
     }
 
     @Test
     public void test() {
+        System.out.println(generateTrees(3));
     }
 }
 
