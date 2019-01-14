@@ -60,12 +60,16 @@ public class TestJava {
         char[]   data={'a','b','c'};
         String  s=new   String(data);
         System.out.println(s);
+        //字符串的list可以直接转成字符串数组
         List<String> lxs = new ArrayList<>();
         lxs.add("1");
         lxs.add("2");
         lxs.add("3");
         String[] xas = lxs.toArray(new String[lxs.size()]);
         System.out.println(xas);
+        //null == 0时 报空指针
+        Integer axa = null;
+        System.out.println(axa == 0);
 
 
     }
