@@ -98,4 +98,20 @@ public class TestJava {
         return result;
     }
 
+    static int c = 0;
+
+    public void xmain() throws InterruptedException {
+        for (int i = 0; i < 1000; i++) {
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    c++;
+                }
+            });
+            t.start();
+            t.join();
+        }
+        System.out.println(c);
+    }
+
 }
