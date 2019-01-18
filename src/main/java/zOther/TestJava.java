@@ -1,11 +1,6 @@
 package zOther;
 
-import com.sun.deploy.util.StringUtils;
-
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @description: 描述
@@ -16,6 +11,8 @@ import java.util.List;
 
 public class TestJava {
     public static void main(String[] args) {
+
+        /**
         String a = "201810";
 //        System.out.println(a.substring(4));
         System.out.println(a.substring(0,1));
@@ -69,7 +66,17 @@ public class TestJava {
         System.out.println(xas);
         //null == 0时 报空指针
         Integer axa = null;
-        System.out.println(axa == 0);
+//        System.out.println(axa == 0);
+        */
+
+        //线程
+        try {
+            xmain();
+//            xmain3();
+//            xmain2();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -100,17 +107,54 @@ public class TestJava {
 
     static int c = 0;
 
-    public void xmain() throws InterruptedException {
-        for (int i = 0; i < 1000; i++) {
-            Thread t = new Thread(new Runnable() {
+    //jvm锁粗话问题 https://blog.csdn.net/ft305977550/article/details/78769573
+    //经典 可看
+    public static void xmain() throws InterruptedException {
+        for (int i = 0; i < 500; i++) {
+            Thread t = new Thread() {
                 @Override
                 public void run() {
-                    c++;
+                    for (int j = 0; j < 100; j++) {
+                        c++;
+                    }
                 }
-            });
+            };
             t.start();
-            t.join();
+//            t.join();
         }
+        Thread.sleep(10000);
+        System.out.println(c);
+    }
+
+    public static void xmain3() throws Exception{
+        Thread a = new Thread() {
+            @Override
+            public void run() {
+                for( int j = 0 ; j < 100000 ; j++ ) c++;
+            }
+        };
+        a.start();
+        Thread b = new Thread() {
+            @Override
+            public void run() {
+                for( int j = 0 ; j < 100000 ; j++ ) c--;
+            }
+        };
+        b.start();
+        a.join();
+        b.join();
+        System.out.println(c);
+
+    }
+
+    public static void xmain2() throws InterruptedException {
+        for (int i = 0; i < 10; i++) {
+            Thread t = new ThreadX(c);
+            t.start();
+            System.out.println(t.getName());
+//            t.join();
+        }
+        Thread.sleep(5000);
         System.out.println(c);
     }
 
