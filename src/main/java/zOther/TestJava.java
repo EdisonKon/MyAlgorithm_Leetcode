@@ -116,6 +116,7 @@ public class TestJava {
                 public void run() {
                     for (int j = 0; j < 100; j++) {
                         c++;
+                        //System.out.println(c); 可能引起锁粗化
                     }
                 }
             };
