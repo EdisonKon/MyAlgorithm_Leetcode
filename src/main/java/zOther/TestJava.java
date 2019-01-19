@@ -153,7 +153,7 @@ public class TestJava {
             Thread t = new ThreadX(c);
             t.start();
             System.out.println(t.getName());
-//            t.join();
+            t.join();
         }
         Thread.sleep(5000);
         System.out.println(c);
