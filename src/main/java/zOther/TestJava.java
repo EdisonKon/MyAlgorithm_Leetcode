@@ -128,6 +128,7 @@ public class TestJava {
     }
 
     public static void xmain3() throws Exception{
+
         Thread a = new Thread() {
             @Override
             public void run() {
