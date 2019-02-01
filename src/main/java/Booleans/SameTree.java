@@ -42,6 +42,7 @@ import org.junit.Test;
  */
 
 public class SameTree {
+
     public SameTree() {
 
     }
