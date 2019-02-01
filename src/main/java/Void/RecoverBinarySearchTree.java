@@ -54,6 +54,10 @@ import java.util.List;
  *
  * A solution using O(n) space is pretty straight forward.
  * Could you devise a constant space solution?
+ *
+ * follow up O(1)的空间复杂度可以用morris遍历
+ * https://blog.csdn.net/zjucor/article/details/72898494
+ * //TODO 待完成
  */
 
 public class RecoverBinarySearchTree {
