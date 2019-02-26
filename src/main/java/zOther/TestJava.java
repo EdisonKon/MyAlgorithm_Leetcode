@@ -68,7 +68,7 @@ public class TestJava {
         Integer axa = null;
 //        System.out.println(axa == 0);
         */
-
+/**
         //线程
         try {
             xmain();
@@ -77,8 +77,13 @@ public class TestJava {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
+*/
+        int i = 0;
+        Ax a = new Ax();
+        tein(i);
+        teAx(a);
+        System.out.println(i);
+        System.out.println(a.value);
     }
 
     public static int parseInt(String num,int index){
@@ -162,4 +167,17 @@ public class TestJava {
         System.out.println(c);
     }
 
+    public static void tein (int i){
+        i = i+1;
+    }
+    public static void teAx (Ax a){
+        a.value = a.value+1;
+    }
+
+    static class Ax{
+        public int value;
+        public Ax(){
+            value = 0;
+        }
+    }
 }
