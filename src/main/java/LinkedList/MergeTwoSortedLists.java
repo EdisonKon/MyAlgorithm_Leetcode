@@ -59,6 +59,60 @@ public class MergeTwoSortedLists {
         }
     }
 
+    /**
+     * 直接merge法
+     * Runtime: 1 ms, faster than 84.74% of Java online submissions for Merge Two Sorted Lists.
+     * Memory Usage: 37 MB, less than 97.95% of Java online submissions for Merge Two Sorted Lists.
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
+        ListNode lr = null;
+        ListNode lrn = null;
+        while (l1 != null && l2 != null) {
+            if (l1.val <= l2.val) {
+                if (lr == null) {
+                    lr = l1;
+                    lrn = lr;
+                }else{
+                    lr.next = l1;
+                    lr = lr.next;
+                }
+                l1 = l1.next;
+                if (lr.val == l2.val) {
+                    lr.next = l2;
+                    l2 = l2.next;
+                    lr = lr.next;
+                }
+            }else{
+                if (lr == null) {
+                    lr = l2;
+                    lrn = lr;
+                }else{
+                    lr.next = l2;
+                    lr = lr.next;
+                }
+                l2 = l2.next;
+            }
+        }
+        if(l1==null && l2!=null){
+            if(lr!=null){
+                lr.next = l2;
+            }else{
+                lrn = l2;
+            }
+        }
+        if(l2==null && l1!=null){
+            if(lr!=null){
+                lr.next = l1;
+            }else{
+                lrn = l1;
+            }
+        }
+        return lrn;
+    }
+
     @Test
     public void test(){
         int[] a = {1,2,4};
@@ -69,7 +123,7 @@ public class MergeTwoSortedLists {
             tem.next = lx;
             tem = tem.next;
         }
-        int[] a1 = {5};
+        int[] a1 = {1,2,5};
         ListNode l2 = new ListNode(a1[0]);
         tem = l2;
         for(int i=1;i<a1.length;i++){
@@ -78,6 +132,7 @@ public class MergeTwoSortedLists {
             tem = tem.next;
         }
 
-        mergeTwoLists(l1,l2);
+//        mergeTwoLists(l1,l2);
+        mergeTwoLists2(l1,l2);
     }
 }
