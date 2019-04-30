@@ -50,6 +50,39 @@ public class ReverseLinkedList {
         return p;
     }
 
+    /**
+     * 练习1
+     * @param head
+     * @return
+     */
+    public ListNode reverseListNode(ListNode head){
+        ListNode l1 = null;
+        while(head!=null){
+            ListNode temp = head.next;
+            head.next = l1;
+            l1 = head;
+            head = temp;
+        }
+        return l1;
+    }
+    /**
+     * 练习2
+     * @param head
+     * @return
+     */
+    public ListNode reverseListTrain2(ListNode head){
+        ListNode rst = null;
+        while(head!=null){
+            ListNode temp = head.next;
+            head.next = rst;
+            rst = head;
+            head = temp;
+        }
+        return rst;
+    }
+
+
+
     @Test
     public void test() {
         int[] a = {1,2,3};int tar = 1;
@@ -60,7 +93,8 @@ public class ReverseLinkedList {
             tem.next = lx;
             tem = tem.next;
         }
-        reverseList(l1);
+        l1 = reverseList(l1);
+        reverseListTrain2(l1);
     }
 }
 
