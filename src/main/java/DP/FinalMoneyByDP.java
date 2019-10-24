@@ -1,4 +1,4 @@
-package MyArrays;
+package DP;
 
 import org.junit.Test;
 
