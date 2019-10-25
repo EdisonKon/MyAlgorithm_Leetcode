@@ -47,6 +47,8 @@ public class Test1024 {
      * j+k不能大于24
      * 一遍一遍选k保证每个j都选到响应的k
      * 每逢j+k小于24则多一种情况,并汇总f[i+1][j+k]
+     *
+     * 结果 38567100
      */
     public static void test1024(){
         int[][] f = new int[11][25];
