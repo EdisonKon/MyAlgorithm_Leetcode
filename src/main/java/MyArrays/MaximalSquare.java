@@ -57,16 +57,17 @@ public class MaximalSquare {
         //开始dp
         for (int i = 1; i < m; i++) {
             for (int j = 1; j < n; j++) {
-                if(matrix[i][j] - '0' == 0){
+                if(matrix[i][j] == '0'){
                     dp[i][j] = 0;
                 }else{
                     int minLen = 0;
                     minLen = Math.min(dp[i-1][j],dp[i][j-1]);
                     minLen = Math.min(minLen,dp[i-1][j-1]);
-                    dp[i][j] = matrix[i][j] - '0' + minLen;
-                    if(dp[i][j]>maxLen){
-                        maxLen = dp[i][j];
+                    if(matrix[i][j] == '1'){
+                        minLen +=1;
                     }
+                    dp[i][j] = minLen;
+                    maxLen = Math.max(maxLen,dp[i][j]);
                 }
             }
         }
