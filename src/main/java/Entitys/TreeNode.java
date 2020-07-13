@@ -1,6 +1,6 @@
 package Entitys;
 
-import org.junit.Test;
+import BinaryTree.BinaryTreeMaxPathSum;
 
 /**
  * @description: 描述
@@ -13,16 +13,26 @@ public class TreeNode {
     public int val;
     public TreeNode left;
     public TreeNode right;
-
-    public TreeNode(int x) {
-        val = x;
+    public TreeNode() {}
+    public TreeNode(int val) { this.val = val; }
+    public TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
     }
 
-
-
-    @Test
-    public void test() {
-
+    public static TreeNode genTreeNode(int[] ints, int index){
+        TreeNode temp = new TreeNode();
+        if(ints[index]==0){
+            return null;
+        }else{
+            temp.val = ints[index];
+            if(2*index+1<ints.length){
+                temp.left = genTreeNode(ints,2*index+1);
+                temp.right = genTreeNode(ints,2*index+2);
+            }
+        }
+        return temp;
     }
 }
 

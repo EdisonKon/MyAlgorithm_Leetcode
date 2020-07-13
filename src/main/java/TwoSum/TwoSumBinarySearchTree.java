@@ -1,5 +1,7 @@
 package TwoSum;
 
+import Entitys.TreeNode;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,12 +41,6 @@ import java.util.Set;
  * 使用递归遍历所有树节点,然后相加为k的话就返回为true 不是的话就把当前节点的值加入到set
  */
 public class TwoSumBinarySearchTree {
-    public class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
     public boolean findTarget(TreeNode root, int k) {
         Set< Integer > set = new HashSet();
         return find(root, k, set);
