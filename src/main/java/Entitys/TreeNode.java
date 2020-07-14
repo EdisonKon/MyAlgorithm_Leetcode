@@ -34,5 +34,13 @@ public class TreeNode {
         }
         return temp;
     }
+    public static TreeNode genTreeNode(String s){
+        int[] ints = new int[s.length()];
+        for (int i =0;i<s.length();i++){
+            ints[i] = Integer.parseInt(String.valueOf(s.charAt(i)));
+        }
+
+        return genTreeNode(ints,0);
+    }
 }
 
