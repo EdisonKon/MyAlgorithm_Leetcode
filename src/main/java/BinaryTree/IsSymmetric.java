@@ -96,4 +96,17 @@ public class IsSymmetric {
         TreeNode tn = TreeNode.genTreeNode(new int[]{1,2,2,3,4,4,3},0);
         isSymmetric(tn);
     }
+
+    public boolean testSelf(TreeNode root) {
+        if(root==null){
+            return true;
+        }
+        return helpx(root.left,root.right);
+    }
+
+    private boolean helpx(TreeNode left, TreeNode right) {
+        if(left == null && right == null) return true;
+        if(left==null||right==null||left.left!=right.right) return false;
+        return helpx(left.left,right.right) && helpx(left.right,right.left);
+    }
 }

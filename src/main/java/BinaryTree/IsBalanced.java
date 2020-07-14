@@ -88,28 +88,31 @@ public class IsBalanced {
         }
         return 0;
     }
-    public boolean helper(TreeNode root,int dis){
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while (!queue.isEmpty()){
-            TreeNode tn = queue.poll();
-            if(tn.left!=null){
-                dis++;
-                queue.offer(tn.left);
-            }
-            if(tn.right!=null){
-                dis--;
-                queue.offer(tn.right);
-            }
-            if(dis>1||dis<-1){
-                return false;
-            }
-        }
-        return true;
-    }
 
     @Test
     public void test() {
 
+    }
+
+
+    public boolean testSelf(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        return helpx(root) != -1;
+    }
+    public int helpx(TreeNode root){
+        if(root!=null){
+            int left = helpx(root.left);
+            if(left==-1){
+                return -1;
+            }
+            int right = helpx(root.right);
+            if(right==-1){
+                return -1;
+            }
+            return Math.abs(left - right)>1?-1:(Math.max(left,right)+1);
+        }
+        return 0;
     }
 }
