@@ -121,8 +121,97 @@ public class QuickSortAlgorithm {
     public void test() {
         int[] arr = {4,2,3,5,1,7,6,8};
 //        quickSortByRecursive(arr,0,arr.length-1);
-        quickSortByStack(arr,0,arr.length-1);
+//        quickSortByStack(arr,0,arr.length-1);
+        QuickSort(arr,0,arr.length-1);
         System.out.println(arr);
     }
+
+    void QuickSort(int R[], int lo, int hi){
+        int i = lo, j = hi;
+        int temp;
+        if(i < j){
+            temp = R[i];
+            while (i != j)
+            {
+                while(i < j && R[j] > temp){
+                    -- j;
+                }
+                R[i] = R[j];
+                while(i < j && R[i] < temp){
+                    ++ i;
+                }
+                R[j] = R[i];
+            }
+            R[i] = temp;
+            QuickSort(R, lo, i - 1);
+            QuickSort(R, i + 1, hi);
+        }
+    }
+
+
+    void QuickSort2(int R[], int lo, int hi){
+        int i = lo;
+        int j = hi;
+        int temp;
+        if(i<j){
+            temp = R[i];
+            while(i!=j){
+                while(i<j && R[i]<temp){
+                    ++i;
+                }
+                R[j] = R[i];
+                while (i < j && R[j]>temp) {
+                    --j;
+                }
+                R[i] = R[j];
+            }
+            R[i] = temp;
+            QuickSort2(R,lo,i-1);
+            QuickSort2(R,i+1,hi);
+        }
+    }
+
+
+    public void qs(int[] r,int lo,int hi){
+        int i = lo;
+        int j = hi;
+        int temp ;
+        if(i<j){
+            temp = r[i];
+            while(i!=j){
+                while(i<j&&r[i]<temp){
+                    ++i;
+                }
+                r[j] = r[i];
+                while(i<j && r[j]>temp){
+                    --j;
+                }
+                r[j] = r[i];
+            }
+            r[i] = temp;
+            qs(r,lo,i-1);
+            qs(r,i+1,hi);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 

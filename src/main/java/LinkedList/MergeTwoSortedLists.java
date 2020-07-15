@@ -4,6 +4,8 @@ import Entitys.ListNode;
 import org.junit.Test;
 import java.util.Comparator;
 import java.util.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *
@@ -20,7 +22,7 @@ import java.util.*;
  */
 public class MergeTwoSortedLists {
     public MergeTwoSortedLists(){
-
+        Lock lock = new ReentrantLock();
     }
     /**
      * O(n)
