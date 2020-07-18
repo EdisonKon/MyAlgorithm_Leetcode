@@ -195,6 +195,29 @@ public class QuickSortAlgorithm {
     }
 
 
+    public void qsx(int[] r,int lo ,int hi){
+        int i = lo,j=hi;
+        int temp;
+        if(i<j){
+            temp = r[i];
+            while(i!=j){
+                while(i<j&&r[i]<temp){
+                    ++i;
+                }
+                r[j] = r[i];
+                while(i<j&&r[j]>temp){
+                    --j;
+                }
+                r[i] = r[j];
+            }
+            r[i] = temp;
+            qsx(r,lo,i-1);
+            qsx(r,i+1,hi);
+        }
+
+
+
+    }
 
 
 
@@ -205,8 +228,43 @@ public class QuickSortAlgorithm {
 
 
 
+    public static int a = 0;
+    public static Object o = new Object();
+
+    public static void add(int i) throws InterruptedException {
+        synchronized (o){
+            while(a%2!=i){
+                o.wait();
+            }
+            a+=1;
+            System.out.println(Thread.currentThread().getName()+":"+a);
+            o.notify();
+        }
+    }
+    static Thread ta = new Thread(()->{
+        try {
+            for (int i = 0; i < 100; i++) {
+                add(1);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    });
+    static Thread tb = new Thread(()->{
+        try {
+            for (int i = 0; i < 100; i++) {
+                add(0);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    });
 
 
+    public static void main(String[] args) {
+        ta.start();
+        tb.start();
+    }
 
 
 

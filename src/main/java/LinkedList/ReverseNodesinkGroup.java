@@ -3,6 +3,13 @@ package LinkedList;
 import Entitys.ListNode;
 import org.junit.Test;
 
+import java.util.Stack;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.StampedLock;
+
 /**
  *
  * Hard
@@ -90,7 +97,6 @@ public class ReverseNodesinkGroup {
             return head;
         }
     }
-
     /**
      * leetcode
      * @param head
@@ -112,6 +118,8 @@ public class ReverseNodesinkGroup {
             temp = temp.next;
             num++;
         }
+        Stack stack = new Stack();
+        stack.pop();
 
         if (num == k) {
             end.next = reverseKGroup3(temp, k);
@@ -133,6 +141,20 @@ public class ReverseNodesinkGroup {
             tem = tem.next;
         }
 
-        reverseKGroup(l1,4);
+        reverseKGroup2(l1,4);
+//        reverseKBack(l1);
     }
+
+    public ListNode reverseKBack(ListNode l){
+        ListNode lback = null;
+        while(l!=null){
+            ListNode temp = l.next;
+            l.next = lback;
+            lback = l;
+            l = temp;
+        }
+        return lback;
+
+    }
+
 }
