@@ -7,7 +7,7 @@ import org.junit.Test;
  * @description: 描述 Easy
  * @author: dekai.kong
  * @date: 2018-12-17 17:34
- * @from https://leetcode.com/problems/reverse-linked-list/
+ * @from https://leetcode.com/problems/reverse-linked-list/ 206
  * Reverse a singly linked list.
  *
  * Example:
@@ -37,6 +37,17 @@ public class ReverseLinkedList {
         return l1;
     }
 
+    public ListNode reverseListx(ListNode head) {
+        ListNode newHead = null;
+        while(head!=null){
+            ListNode temp = head.next;
+            head.next = newHead;
+            newHead = head;
+            head = temp;
+        }
+        return newHead;
+    }
+
     /**
      * 递归recursive
      * @param head
@@ -49,6 +60,21 @@ public class ReverseLinkedList {
         head.next = null;
         return p;
     }
+
+    /**
+     * 递归练习1
+     */
+    public ListNode reverseRecursive1(ListNode head){
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode temp = head.next;
+        head.next = null;
+        ListNode newHead = reverseRecursive1(temp);
+        temp.next = head;
+        return newHead;
+    }
+
 
     /**
      * 练习1
