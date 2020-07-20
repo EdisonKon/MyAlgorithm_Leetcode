@@ -10,7 +10,7 @@ import java.util.List;
  * @description: 描述 Medium
  * @author: dekai.kong
  * @date: 2018-12-17 16:53
- * @from https://leetcode.com/problems/rotate-list/
+ * @from 61. https://leetcode.com/problems/rotate-list/
  * Given a linked list, rotate the list to the right by k places, where k is non-negative.
  *
  * Example 1:
@@ -204,10 +204,51 @@ public class RotateList {
         start.next = null;
         return head;
     }
+
+    /**
+     * 2020/7/19新想法,头个尾巴相连,然后再往后走长度-k个数,把它的phead.next = null就可以了
+     *
+     *
+     * Runtime: 0 ms, faster than 100.00% of Java online submissions for Rotate List.
+     * Memory Usage: 39.5 MB, less than 20.79% of Java online submissions for Rotate List.
+     *
+     * 哈哈哈 自己突发奇想,无敌噢
+     */
+    public ListNode rotateRightx(ListNode head, int k) {
+        if(head == null||head.next == null){
+            return head;
+        }
+        int len = 1;
+        int turn = 0;
+        ListNode phead = head;
+        while(head.next!=null){
+            head = head.next;
+            len++;
+        }
+        head.next = phead;
+
+        if(len < k){
+            turn = len - k%len;
+        }else{
+            turn = len-k;
+        }
+        for(int i = turn;i>=0;i--){
+            ListNode pNode = head;
+            head = head.next;
+            if(i==0){
+                pNode.next = null;
+            }
+        }
+        return head;
+
+
+    }
+
     @Test
     public void test() {
 //        int[] a = {1,2,3,4,5};int tar = 2;
-        int[] a = {1,2};int tar = 2;
+        int[] a = {0,1,2};int tar = 4;
+//        int[] a = {1,2};int tar = 2;
         ListNode l1 = new ListNode(a[0]);
         ListNode tem = l1;
         for(int i=1;i<a.length;i++){
@@ -215,7 +256,8 @@ public class RotateList {
             tem.next = lx;
             tem = tem.next;
         }
-        rotateRight3(l1,tar);
+//        rotateRight3(l1,tar);
+        rotateRightx(l1,tar);
     }
 }
 

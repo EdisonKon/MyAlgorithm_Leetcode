@@ -3,11 +3,12 @@ package LinkedList;
 import Entitys.ListNode;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.Stack;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.locks.StampedLock;
 
 /**
@@ -145,16 +146,27 @@ public class ReverseNodesinkGroup {
 //        reverseKBack(l1);
     }
 
-    public ListNode reverseKBack(ListNode l){
-        ListNode lback = null;
-        while(l!=null){
-            ListNode temp = l.next;
-            l.next = lback;
-            lback = l;
-            l = temp;
+    public ListNode reverseKBack(ListNode l,int k){
+        ListNode temp = l;
+        ListNode ans = null;
+        ListNode end = null;
+        int count = 0;
+        while(temp!=null && count<k){
+            ListNode node = new ListNode(temp.val);
+            node.next = ans;
+            ans = node;
+            if(end==null){
+                end = ans;
+            }
+            temp = temp.next;
+            count++;
         }
-        return lback;
-
+        if(count == k){
+            end.next = reverseKBack(temp,k);
+            return ans;
+        }else{
+            return l;
+        }
     }
 
 }
