@@ -19,7 +19,7 @@ import java.util.Arrays;
  * 输出：5
  * 来源：字节跳动 面试题
  *
- * 思路,双指针
+ * 思路,双指针,左右两边的数的平方肯定最大,从左右两边开始数
  **/
 public class SortedSquaresII {
     public SortedSquaresII() {
