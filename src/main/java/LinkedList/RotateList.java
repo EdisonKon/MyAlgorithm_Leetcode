@@ -206,7 +206,7 @@ public class RotateList {
     }
 
     /**
-     * 2020/7/19新想法,头个尾巴相连,然后再往后走长度-k个数,把它的phead.next = null就可以了
+     * 2020/7/19新想法,头个尾巴相连,然后再往后走长度l-k个数,把它的phead.next = null就可以了
      *
      *
      * Runtime: 0 ms, faster than 100.00% of Java online submissions for Rotate List.
