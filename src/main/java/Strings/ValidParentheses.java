@@ -105,6 +105,9 @@ public class ValidParentheses {
         return stack.isEmpty();
     }
 
+
+
+
     @Test
     public void test(){
 //        System.out.println(isValid("()[]{}"));
@@ -113,5 +116,26 @@ public class ValidParentheses {
 //        System.out.println(isValid("{[(])}"));
 //        System.out.println(isValid("()"));
         System.out.println(isValid("(([[]]){{}})"));
+    }
+
+
+
+    public boolean tsIsvalid(String s){
+        if(s.length()<1||s==null){
+            return true;
+        }
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == '('){
+                stack.push(')');
+            }else if(s.charAt(i) == '['){
+                stack.push(']');
+            }else if(s.charAt(i)=='{'){
+                stack.push('}');
+            }else if(stack.isEmpty()||s.charAt(i)!=stack.pop()){
+                return false;
+            }
+        }
+        return stack.isEmpty();
     }
 }
