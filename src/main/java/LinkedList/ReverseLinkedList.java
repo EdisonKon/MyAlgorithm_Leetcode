@@ -122,5 +122,16 @@ public class ReverseLinkedList {
         l1 = reverseList(l1);
         reverseListTrain2(l1);
     }
+    //1-2-3
+    public ListNode reverseList3(ListNode head){
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode temp = head.next;
+        head.next = null;
+        ListNode newHead = reverseList3(temp);
+        temp.next = head;
+        return newHead;
+    }
 }
 
