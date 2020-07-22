@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * @author dekai.kong
@@ -142,10 +143,79 @@ public class LongestValidParentheses {
 //        longestValidParentheses(")((()())");
 //        longestValidParentheses(")((())))))");
 //        longestValidParentheses(")(()))()");
-        longestValidParentheses3("()(())");
+//        longestValidParentheses3("()(())");
 //        longestValidParentheses(")()())()()(");
 //        longestValidParentheses("(()(((()");
 //        longestValidParentheses(")()(())()");
         // 1 1 2 3 3 2 3 2 1 3
+        System.out.println(doCrack("())(()()"));
     }
+
+
+    /**
+     * 执行用时：
+     * 3 ms
+     * , 在所有 Java 提交中击败了
+     * 51.60%
+     * 的用户
+     * 内存消耗：
+     * 39.8 MB
+     * , 在所有 Java 提交中击败了
+     * 9.52%
+     * 的用户
+     * @param s
+     * @return
+     */
+    public int newStack(String s){
+        if(s==null||s.length()<2){
+            return 0;
+        }
+        Stack<Integer> stack = new Stack<>();
+        //用于初始化计算
+        stack.push(-1);
+        int max = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if(s.charAt(i)=='('){
+                stack.push(i);
+            }else{
+                stack.pop();
+                if(stack.isEmpty()){
+                    stack.push(i);
+                }else{
+                    max = Math.max(max,i-stack.peek());
+                }
+            }
+        }
+        return max;
+    }
+    //指针解法
+    //()(()
+    public int doCrack(String s){
+        if(s==null||s.length()<2) {
+            return 0;
+        }
+        int max = 0;
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        for(int i = 0;i<s.length();i++){
+            if(s.charAt(i) == '('){
+                stack.push(i);
+            }else{
+                stack.pop();
+                if(stack.isEmpty()){
+                    stack.push(i);
+                }else{
+                    max = Math.max(max,i-stack.peek());
+                }
+            }
+        }
+        return max;
+    }
+
+    @Test
+    public void test2() {
+//        System.out.println(crackalg(")()())"));
+        System.out.println(doCrack("()(())"));
+    }
+
 }

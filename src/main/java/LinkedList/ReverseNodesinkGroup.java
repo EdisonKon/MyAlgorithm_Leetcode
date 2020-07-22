@@ -169,4 +169,32 @@ public class ReverseNodesinkGroup {
         }
     }
 
+
+    public ListNode tryKg1(ListNode head,int k){
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode temp = head;
+        ListNode ans = null;
+        ListNode end = null;
+        int count = 0;
+
+        while(count<k && temp!=null){
+            ListNode inTemp = new ListNode(temp.val);
+            inTemp.next = ans;
+            ans = inTemp;
+            if(end == null){
+                end = ans;
+            }
+            temp = temp.next;
+            count++;
+        }
+        if(count == k){
+            end.next = tryKg1(temp,k);
+            return ans;
+        }else{
+            return head;
+        }
+    }
+
 }
