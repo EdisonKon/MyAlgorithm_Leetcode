@@ -66,7 +66,35 @@ public class MaximumSubarray {
     public void test(){
 //        int[] a = new int[]{-2,1,-3,4,-1,2,1,-5,4};
         int[] a = new int[]{-5,-6,-7,7};
-        maxSubArray(a);
-        maxSubArray2(a);
+//        maxSubArray(a);
+//        maxSubArray2(a);
+        maxSubArrayx(new int[]{-2,1,-3,4,-1,2,1,-5,4});
+    }
+
+
+    /**
+     * 执行用时：
+     * 1 ms
+     * , 在所有 Java 提交中击败了
+     * 95.17%
+     * 的用户
+     * @param nums
+     * @return
+     *
+     * 思路,dp思想
+     */
+    public int maxSubArrayx(int[] nums) {
+        if(nums.length == 0){
+            return 0;
+        }
+        int max = nums[0];
+        int[] maxs = new int[nums.length];
+        maxs[0] = nums[0];
+        for(int i = 1;i<nums.length;i++){
+            int cur = maxs[i-1]<0?nums[i]:(nums[i]+maxs[i-1]);
+            maxs[i] = cur;
+            max = Math.max(max,cur);
+        }
+        return max;
     }
 }
