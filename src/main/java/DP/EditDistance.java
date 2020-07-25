@@ -6,7 +6,21 @@ import org.junit.Test;
  * @author dekai.kong
  * @difficult medium
  * @create 2020-07-25 15:20
- * @from
+ * @from  两个字符串修改距离(就是有1->2的操作次数)
+ * S:"algorithm"
+ * T:"altruistic"
+ * 可以2个字符是相等:说明没变化 不加1
+ * t[i] 由空白 - > s[j] 字母 +1
+ * t[i] 由字母 - > s[j] 空白 +1
+ * t[i] 由字母 - > s[j] 字母 +1
+ * 3种情况 都是+1,并且需要判断上一步的最小值
+ * 也就是 1 + Math.min(
+ *                     dp[i-1][j-1],
+ *                     dp[i][j-1],
+ *                     dp[i-1][j]
+ *                     );
+ *
+ *                     3种值的最小值;
  **/
 public class EditDistance {
     public EditDistance() {
