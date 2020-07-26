@@ -15,7 +15,7 @@ import java.util.Arrays;
  * 从后往前找到 i ->右边比自己大 : 例子中是 1
  * 从 i 往后找比自己大的集合里最小的数 : 例子中是 543 中的3
  * 将i和3交换   : 例子中是 23541
- * 然后从i+1 到 length 进行从小到大排序,得到的就是下一个全排列 : 例子中是 23145
+ * 然后从i+1 到 length 进行从小到大排序(或者 直接从i+1到结尾进行翻转),得到的就是下一个全排列 : 例子中是 23145
  *
  **/
 public class NextArray {
@@ -27,7 +27,6 @@ public class NextArray {
         if (s.length()<=1){
             return s;
         }
-        String ans = "";
         int cur = 0;
         int min = Integer.MAX_VALUE;
         int ind = 0;
@@ -48,12 +47,25 @@ public class NextArray {
         char temp = chars[cur];
         chars[cur] = (char) min;
         chars[ind] = temp;
+//      排序解法
+//        String ans = "";
+//        Arrays.sort(chars,cur+1,chars.length);
+//        for (char c:chars) {
+//            ans+=c;
+//        }
+//        return ans;
 
-        Arrays.sort(chars,cur+1,chars.length);
-        for (char c:chars) {
-            ans+=c;
+        //翻转
+        StringBuilder sb = new StringBuilder();
+        for (int i = chars.length-1; i >=0; i--) {
+            if(i == cur){
+                sb.reverse();
+            }
+            sb.append(chars[i]);
         }
-        return ans;
+        sb.reverse();
+
+        return sb.toString();
     }
 
     @Test
