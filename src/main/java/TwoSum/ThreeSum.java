@@ -209,4 +209,53 @@ public class ThreeSum {
         System.out.println(resultList2);
         System.out.println(resultList3);
     }
+
+    /**
+     * 测试一下回溯能不能解
+     */
+    Set<String> bool;
+    List<List<Integer>> resx = new ArrayList<List<Integer>>();
+    public List<List<Integer>> threeSumBackTrace(int[] nums,int n,int k) {
+        LinkedList<Integer> list = new LinkedList<>();
+        int cur = 0;
+        bool = new HashSet<>();
+        helper(nums,n,k,list,cur);
+        return resx;
+    }
+
+    public void helper(int[] nums,int n,int k,LinkedList<Integer> list,int cur){
+        if(list.size()==n&&cur == k){
+            String s = "";
+            List nl = new LinkedList<>(list);
+            Collections.sort(nl);
+            for (int i = 0; i < nl.size(); i++) {
+                s+=nl.get(i);
+            }
+            if(!bool.contains(s)){
+                bool.add(s);
+                resx.add(nl);
+            }
+            return;
+        }
+        if(list.size()>=n){
+            return;
+        }
+
+        for(int i = 0;i<nums.length;i++){
+            if(list.contains(nums[i])){
+                continue;
+            }
+
+            list.add(nums[i]);
+            cur+=nums[i];
+            helper(nums,n,k,list,cur);
+            cur-=nums[i];
+            list.removeLast();
+        }
+    }
+
+    @Test
+    public void testThreeSumx(){
+        threeSumBackTrace(new int[]{1,2,3,4,5,6,7,8,9},3,10);
+    }
 }
