@@ -16,34 +16,41 @@ public class KMP {
     public String kmp(String s1,String s2){
         int[] next =  getNext(s2);
         int start = 0;
-        int j = next[0];
-        for (int i = 0; i < s1.length(); i++) {
-            if(s1.charAt(i) == s2.charAt(j+1)){
+        int i = 0;
+        int j = 0;
+
+        while (i < s1.length() && j < s2.length())
+        {
+            if (j == -1 || s1.charAt(i) == s2.charAt(j))
+            {
+                i++;
                 j++;
-            }else{
-                j = next[j]+1;
             }
-            if(j==s2.length()-1){
-                start = i - j;
-                break;
+            else {
+                j = next[j];
             }
+        }
+
+        if (j == s2.length()){
+            start = i - j;
+        }
+        else {
+            start =  -1;
         }
 
         return s1.substring(start,start+s2.length());
     }
 
     public int[] getNext(String bs){
-        char[] B = bs.toCharArray();
-        int m = B.length;
-        int[] next = new int[m];
+        int[] next = new int[bs.length()];
         next[0] = -1;
-        for (int i=1;i<m;i++)
+        for (int i=1;i<bs.length();i++)
         {
             int j=next[i-1];
-            while ((B[j+1]!=B[i])&&(j>=0)){
+            while (bs.charAt(j+1)!=bs.charAt(i) && j>=0 ){
                 j=next[j];
             }
-            if (B[j+1]==B[i]){
+            if (bs.charAt(j+1)==bs.charAt(i)){
                 next[i]=j+1;
             }else{
                 next[i]=-1;
@@ -80,4 +87,33 @@ public class KMP {
 
         return next;
     }
+
+
+    @Test
+    public void test2() {
+//        getNext("abcabcdabcabcd");
+        getNextx("abadaba");
+//        kmp("abadaba","adab");
+    }
+    public int[] getNextx(String s)
+    {
+        int[] next = new int[s.length()];
+        next[0] = -1;
+        int i = 0, j = -1;
+
+        while (i < s.length()-1)
+        {
+            if (j == -1 || s.charAt(i) == s.charAt(j))
+            {
+                ++i;
+                ++j;
+                next[i] = j;
+            }
+            else{
+                j = next[j];
+            }
+        }
+        return next;
+    }
+
 }
