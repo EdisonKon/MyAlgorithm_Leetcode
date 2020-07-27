@@ -92,8 +92,8 @@ public class ReverseLinkedListII {
 
     @Test
     public void test() {
-        int[] a = {3,5};
-//        int[] a = {1,2,3,4,5};
+//        int[] a = {3,5};
+        int[] a = {1,2,3,4,5};
 //        int[] a = {1,2};int tar = 2;
         ListNode l1 = new ListNode(a[0]);
         ListNode tem = l1;
@@ -102,7 +102,38 @@ public class ReverseLinkedListII {
             tem.next = lx;
             tem = tem.next;
         }
-        reverseBetween(l1,1,2);
+        reverseBetweenx(l1,2,4);
     }
+
+    /**
+     * 练习: 需要记住要开始反转的元素的头,和开始反转时候的节点,pre 和tail 最后tail.next = 后续的 temp
+     * @param head
+     * @param m
+     * @param n
+     * @return
+     */
+    public ListNode reverseBetweenx(ListNode head, int m, int n) {
+        ListNode headx = new ListNode(-1);
+        headx.next = head;
+        ListNode temp = headx;
+        int cur = 1;
+        for(;cur < m;cur++){
+            temp = temp.next;
+        }
+        ListNode pre = temp;
+        ListNode tail = temp.next;
+        temp = temp.next;
+        ListNode mHead = null;
+        for(;cur<=n;cur++){
+            ListNode next = temp.next;
+            temp.next = mHead;
+            mHead = temp;
+            temp = next;
+        }
+        pre.next = mHead;
+        tail.next = temp;
+        return headx.next;
+    }
+
 }
 
