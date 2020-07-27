@@ -70,6 +70,8 @@ public class ConstructBinaryTreefromPI {
 
     /**
      * 练习构建树 并且输出后序遍历
+     * 剑指 Offer 07. 重建二叉树
+     * https://leetcode-cn.com/problems/zhong-jian-er-cha-shu-lcof/
      * @param pre
      * @param mid
      * @return
