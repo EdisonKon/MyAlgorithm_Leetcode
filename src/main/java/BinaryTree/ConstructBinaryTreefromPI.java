@@ -64,6 +64,36 @@ public class ConstructBinaryTreefromPI {
 
     @Test
     public void test() {
-        TreeNode treeNode = buildTree(new int[]{3,9,20,15,7},new int[]{9,3,15,20,7});
+//        TreeNode treeNode = buildTree(new int[]{3,9,20,15,7},new int[]{9,3,15,20,7});
+        TreeNode treeNode = buildTree2(new int[]{3,9,20,15,7},new int[]{9,3,15,20,7});
+    }
+
+    /**
+     * 练习构建树 并且输出后序遍历
+     * @param pre
+     * @param mid
+     * @return
+     */
+    public TreeNode buildTree2(int[] pre,int[] mid){
+        return helper2(pre,mid,0,pre.length-1,0,mid.length-1);
+    }
+
+    public TreeNode helper2(int[] pre,int[] mid,int pl,int pr,int ml,int mr){
+        if(pl>pr || ml>mr){
+            return null;
+        }
+        int i = ml;
+        for (; i < mr; i++) {
+            if(mid[i] == pre[pl]){
+                break;
+            }
+        }
+
+        TreeNode treeNode = new TreeNode(pre[pl]);
+        treeNode.left = helper2(pre, mid, pl+1, pl+i-ml, ml, i-1);
+        treeNode.right = helper2(pre, mid, pl+i-ml+1, pr, i+1, mr);
+
+        System.out.println(treeNode.val);
+        return treeNode;
     }
 }
