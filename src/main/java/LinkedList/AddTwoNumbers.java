@@ -130,8 +130,12 @@ public class AddTwoNumbers {
     }
     @Test
     public void test(){
-        int[] a = {2,4,4,4};
-        int[] b = {5,6,5};
+//        int[] a = {2,4,4,4};
+//        int[] b = {5,6,5};
+//        int[] a = {7,1,6};
+//        int[] b = {5,9,2};
+        int[] a = {1,8};
+        int[] b = {0};
         ListNode l1 = new ListNode(a[0]);
         ListNode l2 = new ListNode(b[0]);
         ListNode tem = l1;
@@ -159,6 +163,90 @@ public class AddTwoNumbers {
 //        l2.next = l22;
 //        l22.next = l222;
 
-        addTwoNumbers2(l1,l2);
+//        addTwoNumbersx(l1,l2);
+        addTwoNumbersUpgrade(l1,l2);
+    }
+
+
+    /**
+     * ------- 2 ms 100.00%   ------   39.8 MB 100.00%
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode addTwoNumbersx(ListNode l1, ListNode l2) {
+        if(l1 == null ){
+            return l2;
+        }
+        if(l2 == null){
+            return l1;
+        }
+        int up = 0;
+        ListNode node = new ListNode(-1);
+        ListNode temp = node;
+        while(l1!=null && l2!=null){
+            int val = l1.val + l2.val + up;
+            up = 0;
+            if(val>=10){
+                up = 1;
+                val = val%10;
+            }
+            temp.next = new ListNode(val);
+            l1 = l1.next;
+            l2 = l2.next;
+            temp = temp.next;
+        }
+        while(l1!=null){
+            int val = l1.val+up;
+            up = 0 ;
+            if (val >= 10){
+                up = 1;
+                val = val%10;
+            }
+            temp.next = new ListNode(val);
+            temp = temp.next;
+            l1 = l1.next;
+        }
+        while(l2!=null){
+            int val = l2.val+up;
+            up = 0 ;
+            if (val >= 10){
+                up = 1;
+                val = val%10;
+            }
+            temp.next = new ListNode(val);
+            temp = temp.next;
+            l2 = l2.next;
+        }
+        if(l1 == null && l2 == null && up == 1){
+            temp.next = new ListNode(up);
+        }
+        return node.next;
+    }
+
+    /**
+     * 代码结构优化
+     */
+    public ListNode addTwoNumbersUpgrade(ListNode l1, ListNode l2) {
+        int up = 0;
+        ListNode node = new ListNode(-1);
+        ListNode temp = node;
+        while(l1!=null || l2!=null||up == 1){
+            int val = (l1==null?0:l1.val) + (l2==null?0:l2.val) + up;
+            up = 0;
+            if(val>=10){
+                up = 1;
+                val = val%10;
+            }
+            temp.next = new ListNode(val);
+            if(l1!=null){
+                l1 = l1.next;
+            }
+            if(l2!=null){
+                l2 = l2.next;
+            }
+            temp = temp.next;
+        }
+        return node.next;
     }
 }

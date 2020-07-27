@@ -1,8 +1,9 @@
-package Strings;
+package SlidingWindow;
 
 import org.junit.Test;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -159,4 +160,42 @@ public class MaxNumberOfVowels {
         return rst;
     }
 
+    /**
+     * 联系 aeiou
+     * @param s
+     * @param k
+     * @return
+     */
+    //abciiidef
+    public int slwindow(String s, int k){
+        int max = 0;
+        int low = 0;
+        int hi = 0;
+        int cur = 0;
+        int dis = 0;
+        String ae = "aeiou";
+        while(hi<s.length()){
+            if(ae.indexOf(s.charAt(hi))!=-1){
+                cur ++;
+            }
+            dis ++;
+            if(dis > k){
+                if(ae.indexOf(s.charAt(low))!=-1){
+                    cur--;
+                }
+                low ++;
+                dis--;
+            }
+            hi++;
+            max = Math.max(max,cur);
+        }
+
+        return max;
+    }
+
+    @Test
+    public void tex(){
+        int x = 108%10;
+        slwindow("abciiidef",3);
+    }
 }

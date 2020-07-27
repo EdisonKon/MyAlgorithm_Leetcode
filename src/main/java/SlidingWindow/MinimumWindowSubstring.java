@@ -1,4 +1,4 @@
-package Strings;
+package SlidingWindow;
 
 import org.junit.Test;
 
@@ -82,8 +82,54 @@ public class MinimumWindowSubstring {
     }
     @Test
     public void test(){
-        System.out.println(minWindow("cabwefgewcwaefgcf","cae"));
+//        System.out.println(minWindow("cabwefgewcwaefgcf","cae"));
 //        System.out.println(minWindow("ADOBECODEBANC","ABC"));
 //        System.out.println(minWindow("AA","AA"));
+        System.out.println(minWindow2("bba","ab"));
+    }
+
+    public String minWindow2(String s, String t) {
+        int l = 0;
+        int r = 0;
+        //记录不重复的数
+        int hasMatch = 0;
+        Map<Character,Integer> map = new HashMap();
+        for(int i = 0;i<t.length();i++){
+            if(map.get(t.charAt(i))!=null){
+                map.put(t.charAt(i),map.get(t.charAt(i))+1);
+                continue;
+            }
+            map.put(t.charAt(i),1);
+            hasMatch++;
+        }
+        int min_len = Integer.MAX_VALUE;
+        int index = 0;
+        for(;r<s.length();r++){
+            char c = s.charAt(r);
+            //包含
+            if(map.get(c)!=null){
+                map.put(c,map.get(c)-1);
+                if(map.get(c) == 0){
+                    hasMatch--;
+                }
+            }
+            if(hasMatch == 0){
+                while(hasMatch == 0){
+                    if(min_len>r-l+1){
+                        index = l;
+                        min_len = r-l+1;
+                    }
+                    char cl = s.charAt(l);
+                    if(map.get(cl)!=null){
+                        map.put(cl,map.get(cl)+1);
+                        if(map.get(cl)>0){
+                            hasMatch++;
+                        }
+                    }
+                    l++;
+                }
+            }
+        }
+        return min_len == Integer.MAX_VALUE?"":s.substring(index,index+min_len);
     }
 }
