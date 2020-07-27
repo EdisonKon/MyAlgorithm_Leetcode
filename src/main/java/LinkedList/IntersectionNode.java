@@ -102,10 +102,48 @@ public class IntersectionNode {
 
     }
 
+    public ListNode getIntersectionNodex(ListNode headA, ListNode headB) {
+        int a = 0;
+        int b = 0;
+        ListNode ha = headA;
+        ListNode hb = headB;
+        ListNode ans = null;
+        while(ha!=null){
+            a++;
+            ha = ha.next;
+        }
+        while(hb!=null){
+            b++;
+            hb = hb.next;
+        }
+        if(a>b){
+            int len = a - b;
+            while(len>0){
+                headA = headA.next;
+                len--;
+            }
+        }else{
+            int len = b - a;
+            while(len>0){
+                headB = headB.next;
+                len--;
+            }
+        }
+        while(headA!=null && headB!=null){
+            if(headA == headB){
+                ans = headA;
+                break;
+            }
+            headA = headA.next;
+            headB = headB.next;
+        }
+        return ans;
+    }
+
 
 
     @Test
     public void test() {
-
+        getIntersectionNodex(ListNode.GenerateListNode(new int[]{4,1,8,4,5}),ListNode.GenerateListNode(new int[]{5,0,1,8,4,5}));
     }
 }
