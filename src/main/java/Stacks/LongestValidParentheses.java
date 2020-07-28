@@ -1,4 +1,4 @@
-package Strings;
+package Stacks;
 
 import org.junit.Test;
 
@@ -215,7 +215,32 @@ public class LongestValidParentheses {
     @Test
     public void test2() {
 //        System.out.println(crackalg(")()())"));
-        System.out.println(doCrack("()(())"));
+        System.out.println(tsStack(")()())"));
+//        System.out.println(doCrack("()(())"));
+    }
+
+    //)()())
+    public int tsStack(String s){
+        if(s.length() == 0){
+            return 0;
+        }
+        int max = 0;
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        for (int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == '('){
+                stack.push(i);
+            }else{
+                stack.pop();
+                if(stack.isEmpty()){
+                    stack.push(i);
+                }else{
+                    max = Math.max(i - stack.peek(),max);
+                }
+            }
+        }
+
+        return max;
     }
 
 }
