@@ -2,6 +2,7 @@ package Integers;
 
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -228,7 +229,28 @@ public class LargestRectangleinHistogram {
 //        System.out.println(largestRectangleArea3(new int[]{2,1,5,6,2,3}));
 //        largestRectangleArea3(new int[]{1,1,1,1});
 //        largestRectangleArea3(new int[]{9,0});
-        largestRectangleArea(new int[]{4,7,6,8,5,9,1,26});
+//        largestRectangleArea(new int[]{4,7,6,8,5,9,1,26});
+        largestRectangleAreaStack(new int[]{4,7,6,8,5,9,1,26});
+    }
+    public int largestRectangleAreaStack(int[] heights) {
+        int res = 0;
+        if(heights.length==0){
+            return res;
+        }
+        int[] copy = Arrays.copyOf(heights,heights.length+1);
+        Stack<Integer> sindex = new Stack<>();
+        for(int i =0;i<copy.length;){
+            if(sindex.isEmpty()||copy[i] > copy[sindex.peek()]){
+                sindex.push(i);
+                i++;
+            }else{
+                int cur = copy[sindex.pop()];
+                int left = sindex.isEmpty()?0:sindex.peek();
+                int right = i;
+                res = Math.max(res,cur*(right-left-1));
+            }
+        }
+        return res;
     }
 }
 

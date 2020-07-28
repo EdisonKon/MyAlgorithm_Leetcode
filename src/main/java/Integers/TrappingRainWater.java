@@ -2,6 +2,8 @@ package Integers;
 
 import org.junit.Test;
 
+import java.util.Map;
+
 /**
  * @description: 描述 Hard
  * @author: dekai.kong
@@ -131,11 +133,34 @@ public class TrappingRainWater {
 //        System.out.println(trap(new int[]{0,1,2,0}));
 //        System.out.println(trap(new int[]{0,7,1,4,6}));
 //        System.out.println(trap(new int[]{2,1,1,2}));
-        System.out.println(trap(new int[]{5,4,1,2}));
+//        System.out.println(trapx(new int[]{5,4,1,2}));
+        System.out.println(trapx(new int[]{4,3,2,1,5,4}));
 //        System.out.println(trap(new int[]{3,1,1,2}));
 //        System.out.println(trap(new int[]{0,1,0,2,1,1,0,1}));
 //        System.out.println(trap(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
 //        System.out.println(trap(new int[]{0,1,0,2,1,0,1,3,2,1,2,1,2,3}));
+    }
+
+    public int trapx(int[] height){
+        int ans = 0;
+        if(height.length == 0){
+            return ans;
+        }
+        int l = 0;
+        int r = height.length-1;
+        int secondHigh = 0;
+        while(l<r){
+            if(height[l]<height[r]){
+                secondHigh = Math.max(secondHigh,height[l]);
+                ans+=secondHigh-height[l];
+                l++;
+            }else{
+                secondHigh = Math.max(secondHigh,height[r]);
+                ans+= secondHigh - height[r];
+                r--;
+            }
+        }
+        return ans;
     }
 }
 

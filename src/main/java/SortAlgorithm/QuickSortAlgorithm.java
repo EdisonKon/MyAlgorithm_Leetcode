@@ -267,7 +267,27 @@ public class QuickSortAlgorithm {
     }
 
 
-
+    public void qsk(int[] arr,int lo,int hi){
+        int i = lo;
+        int j = hi;
+        int temp;
+        if(i<j){
+            temp = arr[i];
+            while(i!=j){
+                while(i<j && arr[i] < temp){
+                    ++i;
+                }
+                arr[j] = arr[i];
+                while(i<j && arr[j] > temp){
+                    --j;
+                }
+                arr[i] = arr[j];
+            }
+            arr[i] = temp;
+            qs(arr,lo,i-1);
+            qs(arr,i+1,hi);
+        }
+    }
 
 
 
