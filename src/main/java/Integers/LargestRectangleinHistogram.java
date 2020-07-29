@@ -230,8 +230,21 @@ public class LargestRectangleinHistogram {
 //        largestRectangleArea3(new int[]{1,1,1,1});
 //        largestRectangleArea3(new int[]{9,0});
 //        largestRectangleArea(new int[]{4,7,6,8,5,9,1,26});
-        largestRectangleAreaStack(new int[]{4,7,6,8,5,9,1,26});
+        largestRectangleAreaStack(new int[]{1});
     }
+
+    /**
+     * 执行用时：
+     * 16 ms
+     * , 在所有 Java 提交中击败了
+     * 43.76%
+     * 的用户
+     * 内存消耗：
+     * 41.3 MB
+     * , 在所有 Java 提交中击败了
+     * 36.96%
+     * 的用户
+     */
     public int largestRectangleAreaStack(int[] heights) {
         int res = 0;
         if(heights.length==0){
@@ -245,7 +258,7 @@ public class LargestRectangleinHistogram {
                 i++;
             }else{
                 int cur = copy[sindex.pop()];
-                int left = sindex.isEmpty()?0:sindex.peek();
+                int left = sindex.isEmpty()?-1:sindex.peek();
                 int right = i;
                 res = Math.max(res,cur*(right-left-1));
             }

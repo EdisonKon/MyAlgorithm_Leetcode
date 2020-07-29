@@ -1,6 +1,8 @@
-package Integers;
+package DP;
 
 import org.junit.Test;
+
+import java.util.Arrays;
 
 /**
  * @description: 描述 Medium
@@ -64,6 +66,18 @@ public class UniquePaths {
     public void test() {
         System.out.println(uniquePaths(3,2));
         System.out.println(uniquePaths(7,3));
+    }
+
+    public int uniquePathsDP(int m, int n) {
+        int[][] dp = new int[m+1][n+1];
+        dp[0][1] = 1;
+
+        for (int i = 1; i < m+1; i++) {
+            for (int j = 1; j < n+1; j++) {
+                dp[i][j] = dp[i][j-1] + dp[i-1][j];
+            }
+        }
+        return dp[m-1][n-1];
     }
 }
 

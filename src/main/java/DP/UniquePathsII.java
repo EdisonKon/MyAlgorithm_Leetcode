@@ -1,4 +1,4 @@
-package Integers;
+package DP;
 
 import org.junit.Test;
 
