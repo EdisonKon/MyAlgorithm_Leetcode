@@ -8,7 +8,9 @@ import java.util.Map;
  * @description: 描述 Hard
  * @author: dekai.kong
  * @date: 2018-12-12 17:25
- * @from https://leetcode.com/problems/trapping-rain-water/
+ * @from 面试题 17.21. 直方图的水量
+ *
+ * https://leetcode.com/problems/trapping-rain-water/
  * Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.
  *
  *
