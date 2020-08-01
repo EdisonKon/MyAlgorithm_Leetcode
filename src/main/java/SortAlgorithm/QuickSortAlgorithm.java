@@ -119,10 +119,11 @@ public class QuickSortAlgorithm {
 
     @Test
     public void test() {
-        int[] arr = {4,2,3,5,1,7,6,8};
+        int[] arr = {0,1,2,1};
 //        quickSortByRecursive(arr,0,arr.length-1);
 //        quickSortByStack(arr,0,arr.length-1);
         QuickSort(arr,0,arr.length-1);
+//        qs2(arr,0,arr.length-1);
         System.out.println(arr);
     }
 
@@ -133,11 +134,11 @@ public class QuickSortAlgorithm {
             temp = R[i];
             while (i != j)
             {
-                while(i < j && R[j] > temp){
+                while(i < j && R[j] >= temp){
                     -- j;
                 }
                 R[i] = R[j];
-                while(i < j && R[i] < temp){
+                while(i < j && R[i] <= temp){
                     ++ i;
                 }
                 R[j] = R[i];
@@ -145,6 +146,28 @@ public class QuickSortAlgorithm {
             R[i] = temp;
             QuickSort(R, lo, i - 1);
             QuickSort(R, i + 1, hi);
+        }
+    }
+
+    public void qs2(int[] arr,int lo,int hi){
+        int i = lo;
+        int j = hi;
+        int temp = 0;
+        if(i<j){
+            temp = arr[i];
+            while(i!=j){
+                while(i<j && temp <= arr[j]){
+                    --j;
+                }
+                arr[i] = arr[j];
+                while(i<j && temp>=arr[i]){
+                    ++i;
+                }
+                arr[j] = arr[i];
+            }
+            arr[i] = temp;
+            qs2(arr,lo,i-1);
+            qs2(arr,i+1,hi);
         }
     }
 
@@ -156,11 +179,11 @@ public class QuickSortAlgorithm {
         if(i<j){
             temp = R[i];
             while(i!=j){
-                while(i<j && R[i]<temp){
+                while(i<j && R[i]<=temp){
                     ++i;
                 }
                 R[j] = R[i];
-                while (i < j && R[j]>temp) {
+                while (i < j && R[j]>=temp) {
                     --j;
                 }
                 R[i] = R[j];
@@ -179,11 +202,11 @@ public class QuickSortAlgorithm {
         if(i<j){
             temp = r[i];
             while(i!=j){
-                while(i<j&&r[i]<temp){
+                while(i<j&&r[i]<=temp){
                     ++i;
                 }
                 r[j] = r[i];
-                while(i<j && r[j]>temp){
+                while(i<j && r[j]>=temp){
                     --j;
                 }
                 r[j] = r[i];
@@ -201,11 +224,11 @@ public class QuickSortAlgorithm {
         if(i<j){
             temp = r[i];
             while(i!=j){
-                while(i<j&&r[i]<temp){
+                while(i<j&&r[i]<=temp){
                     ++i;
                 }
                 r[j] = r[i];
-                while(i<j&&r[j]>temp){
+                while(i<j&&r[j]>=temp){
                     --j;
                 }
                 r[i] = r[j];
