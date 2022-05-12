@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="MyAlgorithm_Leetcode" />
-        <module name="Algorithm" />
         <module name="MyAlgorithm" />
+        <module name="Algorithm" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
