@@ -102,6 +102,33 @@ public class IntersectionNode {
 
     }
 
+    /**
+     * 第三种方法, 两个列表同时走,当走到尾节点让下一个元素等于另一个链表的头节点,这样2个链表的长度一样, 即可判断是否有相同节点
+     * 比如1 2 3 4和 7 3 4
+     * 1 - 2 - 3 - 4
+     *     7 /
+     * 1 2 3 4 7 3 4
+     * 7 3 4 1 2 3 4
+     * 这样最后相等的节点是 3 则可以得到共同节点 3
+     * @param headA
+     * @param headB
+     * @return
+     */
+    public ListNode getIntersectionNode3(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+        ListNode pA = headA;
+        ListNode pB = headB;
+        while (pA!=pB){
+            pA = pA == null? headB : pA.next;
+            pB = pB == null? headA : pB.next;
+        }
+        return pA;
+
+    }
+
+
     public ListNode getIntersectionNodex(ListNode headA, ListNode headB) {
         int a = 0;
         int b = 0;

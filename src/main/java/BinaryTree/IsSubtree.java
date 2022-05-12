@@ -101,7 +101,14 @@ public class IsSubtree {
 
     @Test
     public void test() {
-        System.out.println(isSubtree2(TreeNode.genTreeNode("345120010"),TreeNode.genTreeNode("412")));
+//        TreeNode treeNode = TreeNode.genTreeNode("345120010");
+        TreeNode treeNode = TreeNode.genTreeNode("2,1");
+        System.out.println(treeNode);
+        String s = TreeNode.tree2String(treeNode);
+        System.out.println(s);
+        TreeNode x = TreeNode.genTreeNode(s);
+        System.out.println(x);
+//        System.out.println(isSubtree2(TreeNode.genTreeNode("345120010"),TreeNode.genTreeNode("412")));
 //        System.out.println(isSubtree2(TreeNode.genTreeNode("110"),TreeNode.genTreeNode("1")));
     }
 }

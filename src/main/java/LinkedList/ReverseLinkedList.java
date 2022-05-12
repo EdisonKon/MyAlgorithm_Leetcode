@@ -107,6 +107,20 @@ public class ReverseLinkedList {
         return rst;
     }
 
+    /**
+     * 练习4
+     */
+    public ListNode reverseListTrain4(ListNode head){
+        ListNode rst = null;
+        while (head!=null){
+            ListNode temp = head.next;
+            head.next = rst;
+            rst = head;
+            head = temp;
+        }
+        return rst;
+    }
+
 
 
     @Test

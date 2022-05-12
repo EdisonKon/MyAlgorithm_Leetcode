@@ -4,6 +4,7 @@ public class ListNode {
     public int val;
     public ListNode next;
     public ListNode(int x) { val = x; }
+    public ListNode() {}
 
     public static ListNode GenerateListNode(int[] x){
         ListNode l1 = new ListNode(-1);
