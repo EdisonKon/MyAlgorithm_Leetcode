@@ -128,6 +128,23 @@ public class IntersectionNode {
 
     }
 
+    /**
+     * https://leetcode.cn/problems/3u1WK4/submissions/
+     * 执行用时： 1 ms , 在所有 Java 提交中击败了 98.21% 的用户
+     * 内存消耗： 44.3 MB , 在所有 Java 提交中击败了 39.92% 的用户
+     */
+    public ListNode getIntersectionNode4(ListNode headA, ListNode headB) {
+        ListNode xa = headA;
+        ListNode xb = headB;
+        if(xa == null || xb == null) return null;
+        while(xa != xb){
+            xa = xa == null? headB : xa.next;
+            xb = xb == null? headA : xb.next;
+        }
+        return xa;
+    }
+
+
 
     public ListNode getIntersectionNodex(ListNode headA, ListNode headB) {
         int a = 0;
